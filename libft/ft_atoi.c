@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 22:42:24 by hsano             #+#    #+#             */
-/*   Updated: 2022/07/17 03:03:11 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/01 02:53:58 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ int	ft_atoi(const char *str)
 //		printf("input:%s\n",s1);
 //		printf("my:%d\n",result);
 //		printf("test:%d\n",len);
+//
+//
 //
 //	}
 //	return (0);

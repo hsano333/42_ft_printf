@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/01 00:21:35 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/01 02:54:30 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void ft_printf(const char *str, ...)
 	printf("%zu",tmp->size);
 
 	/*
+	 *
+	 *
 	pp = va_arg(args, const char*);
 	printf("pp1:%s\n",pp);
 	pp = va_arg(args, const char*);
@@ -103,6 +105,8 @@ void ft_printf(const char *str, ...)
 		pp = va_arg(args, const char*);
 		printf("va_arg=%s\n", pp);
 	}
+
+
 	*/
 
 	printf("end\n");

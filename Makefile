@@ -1,3 +1,5 @@
+
+
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -I ${HEAD}
 NAME 	= libftprintf.a
@@ -10,14 +12,17 @@ OBJS	= $(SRCS:.c=.o)
 LIBFTNAME = libft.a
 LIBFTOBJS = ${LIBFT}/${LIBFTNAME}
 
+
+${LIBFTNAME}	:	
+		make bonus -C $(LIBFT)
+		make all 
+
 all:	${NAME}
 
-${NAME}	:	${OBJS} ${LIBFTOBJS}
+${NAME}	:	${OBJS}
 			cp ${LIBFTOBJS} ${NAME}
 			ar rcs ${NAME} ${OBJS} 
 
-${LIBFTOBJS}	:
-			make bonus -C $(LIBFT)
 clean	:
 			${RM} ${OBJS}
 			${RM} ${OBJS}
@@ -28,3 +33,4 @@ fclean	:	clean
 			${RM} ${LIBFTOBJS}
 
 re		:	fclean all
+

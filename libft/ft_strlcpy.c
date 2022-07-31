@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 00:57:37 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/01 01:00:59 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/01 02:47:13 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 //		o2 = strlcpy(s3,s4,len);
 //		printf("test strlcpy s3=%s,result=%zu\n",s3,o2);
 //		printf("my=%zu,test=%zu\n",o1,o2);
+//
 //
 //	}
 //	return (0);

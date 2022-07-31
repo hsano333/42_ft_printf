@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 23:22:52 by hsano             #+#    #+#             */
-/*   Updated: 2022/07/16 18:47:12 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/01 02:50:59 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 //		o2 = memmove(s3,s4,len);
 //		printf("test   result=%s\n",o2);
 //		printf("my=%s,test=%s\n",o1,o2);
+//
+//
 //
 //	}
 //	return (0);
