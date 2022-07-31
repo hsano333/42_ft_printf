@@ -13,10 +13,11 @@ LIBFTOBJS = ${LIBFT}/${LIBFTNAME}
 all:	${NAME}
 
 ${NAME}	:	${OBJS} ${LIBFTOBJS}
-			ar rcs ${NAME} ${OBJS} ${LIBFTOBJS}
+			cp ${LIBFTOBJS} ${NAME}
+			ar rcs ${NAME} ${OBJS} 
 
 ${LIBFTOBJS}	:
-			make -C $(LIBFT)
+			make bonus -C $(LIBFT)
 clean	:
 			${RM} ${OBJS}
 			${RM} ${OBJS}
