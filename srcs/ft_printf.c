@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/02 00:59:27 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/02 01:09:26 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ void	parse_conversion(const char *str, t_conversion *convs)
 	convs->conversion = str[convs->size - 1];
 }
 
-t_list **parse_str(const char *str)
+t_list *parse_str(const char *str)
 {
 	const char	*pp;
 	t_conversion	*convs;
 	t_list			**convs_list;
+	t_list			*return_list;
 	void (*del_convs)(void*);
 
 	convs_list = (t_list**)malloc(sizeof(t_list**));
@@ -63,8 +64,9 @@ t_list **parse_str(const char *str)
 		ft_lstadd_back(convs_list, ft_lstnew(convs));
 		pp = ft_strchr(++pp, '%');
 	}
-
-	return (convs_list);
+	return_list = convs_list[0];
+	free(convs_list);
+	return (return_list);
 }
 
 void ft_printf(const char *str, ...)
@@ -72,7 +74,7 @@ void ft_printf(const char *str, ...)
 	printf("str:%s",str);
 	//const char	*pp;
 	//int			i;
-	t_list		**c_list;
+	t_list		*c_list;
 	//t_conversion	*tmp;
 	va_list args;
 
@@ -80,8 +82,8 @@ void ft_printf(const char *str, ...)
 	va_start(args, str);
 	print(str, c_list, &args);
 
-	t_list *tmp_list;
-	tmp_list = c_list[0];
+	//t_list *tmp_list;
+	//tmp_list = c_list[0];
 	/*
 	while(tmp_list)
 	{

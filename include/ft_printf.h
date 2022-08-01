@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:26:08 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/02 00:56:44 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/02 01:11:12 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ size_t	where_label_last(const char* str, size_t size);
 int	exist_char(const char* str, char c,  size_t size);
 void clear_conversion(t_conversion* node);
 void info_conversion(t_conversion *convs);
-void	print(const char *str, t_list** c_list, va_list* args);
+void	print(const char *str, t_list* c_list, va_list* args);
 
 
 //TEST
