@@ -13,11 +13,10 @@ LIBFTNAME = libft.a
 LIBFTOBJS = ${LIBFT}/${LIBFTNAME}
 
 
-${LIBFTNAME}	:	
-		make bonus -C $(LIBFT)
-		make all 
 
-all:	${NAME}
+all:	
+		make bonus -C $(LIBFT)
+		make ${NAME}
 
 ${NAME}	:	${OBJS}
 			cp ${LIBFTOBJS} ${NAME}
