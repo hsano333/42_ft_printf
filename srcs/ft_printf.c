@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/02 01:09:26 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/02 01:37:46 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_list *parse_str(const char *str)
 
 void ft_printf(const char *str, ...)
 {
-	printf("str:%s",str);
+	printf("start printf str:%s\n",str);
 	//const char	*pp;
 	//int			i;
 	t_list		*c_list;
