@@ -18,7 +18,8 @@ all:
 		make bonus -C $(LIBFT)
 		make ${NAME}
 
-${NAME}	:	${OBJS}
+${NAME}	:	${OBJS} ${LIBFTOBJS}
+			echo "test"
 			cp ${LIBFTOBJS} ${NAME}
 			ar rcs ${NAME} ${OBJS} 
 

@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:39:54 by hsano             #+#    #+#             */
-/*   Updated: 2022/05/09 04:15:56 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/01 23:24:29 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,3 +149,15 @@ int	ft_atoi_base(char *str, char *base)
 		return (rval * MINUS);
 	return (rval);
 }
+//int main(int argc , char **argv)
+//{
+//	char *str;
+//	char *str2;
+//	if (argc == 3)
+//	{
+//		str = argv[1];
+//		str2 = argv[2];
+//		printf("my  :[%d]\n",ft_atoi_base(str,str2));
+//		printf("atol:[%d]\n",atoi(str));
+//	}
+//}

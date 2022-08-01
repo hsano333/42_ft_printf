@@ -6,19 +6,22 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:26:08 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/01 00:37:53 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/02 00:07:53 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # define VALID_CONVERSIONS "cspdiuxX%%"
-# define INVALID_CONVERSIONS "oOfFeEgGl"
+# define INVALID_CONVERSIONS "oOfFeEgGlz"
 # define VALID_FLAG "-0# +"
+# define BASE_DIGIT "0123456789"
+# define BASE_HEX "0123456789ABCDEF"
 
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdbool.h>
+# include <limits.h>
 # include "../libft/libft.h"
 
 typedef struct s_conversion
@@ -45,11 +48,12 @@ enum CONVERSION { CHAR, STRING, POINTER, DECIMAL, INTEGER, UDECIMAL, LOWHEX, UPH
 int	ft_atoi_base(char *str, char *base);
 size_t	find_conversion(const char *str, int *is_valid);
 void	parse_conversion(const char *str,t_conversion *convs);
-size_t	check_period(const char *str, int str_size);
+size_t	check_period(const char *str, size_t str_size);
 size_t ft_atoin(const char* str, size_t size, int *error);
 size_t	where_label_last(const char* str, size_t size);
 int	exist_char(const char* str, char c,  size_t size);
 void clear_conversion(t_conversion* node);
+void info_conversion(t_conversion *convs);
 
 
 //TEST

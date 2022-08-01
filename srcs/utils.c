@@ -6,51 +6,74 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:25:55 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/01 00:42:52 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/02 00:13:03 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void info_conversion(t_conversion *convs)
+{
+	printf("\ninfo:convs->point:[%s]",convs->point);
+	printf("convs->size:%zu\n",convs->size);
+	printf("convs->conversion:%c\n",convs->conversion);
+	printf("convs->mini_width:%d\n",convs->mini_width);
+	printf("convs->precision:%d\n",convs->precision);
+	printf("convs->flag_minus:%d\n",convs->flag_minus);
+	printf("convs->flag_plus:%d\n",convs->flag_plus);
+	printf("convs->flag_sharp:%d\n",convs->flag_sharp);
+	printf("convs->flag_space:%d\n",convs->flag_space);
+	printf("convs->flag_zero:%d\n",convs->flag_zero);
+	printf("convs->valid:%d\n",convs->valid);
+}
 
 void clear_conversion(t_conversion* node)
 {
 	free(node);
 }
 
-int	is_valid_int_numbers(const char* str, size_t size)
+int	is_invalid_int_numbers(const char** str, size_t size)
 {
 	size_t	i;
 	size_t	first_digit;
 
 	i = 0;
-	while (!('1' <= str[i] && str[i] <= '9') || i < size)
+	while (!('1' <= (*str)[i] && (*str)[i] <= '9') && i < size)
 		(i)++;
-
 	first_digit = i;
-	while (('1' <= str[i] && str[i] <= '9') || i < size)
+	while (('0' <= (*str)[i] && (*str)[i] <= '9') && i < size)
 		i++;
-
-	if (first_digit - i + 1 >= 10 || i == size)
-		return (false);
-	return (true);
+	if (i - first_digit >= 11)
+		return (true);
+	*str = &((*str)[first_digit]);
+	return (false);
 }
 
 size_t ft_atoin(const char* str, size_t size, int *error)
 {
 	char	*p;
 	int		tmp_int;
+	int		tmp_error;
 
-	*error = is_valid_int_numbers(str, size);
-	if (error)
+	tmp_error = is_invalid_int_numbers(&str, size);
+	if (tmp_error)
+	{
+		*error = true;
 		return (0);
+	}
 	p = ft_substr(str, 0, size);
 	if (!p)
 	{
 		*error = true;
 		return (0);
 	}
-	tmp_int = ft_atoi(p);
+	tmp_int = ft_atoi(p, error);
 	free(p);
+	if (tmp_int < 0)
+	{
+		*error = true;
+		return (0);
+	}
 	return (tmp_int);
 }
 
@@ -84,25 +107,28 @@ size_t	find_conversion(const char *str, int *is_valid)
 
 	convs_char = &(VALID_CONVERSIONS[0]);
 	*is_valid = true;
-	i = 0;
-	while (convs_char[i])
+	i = 1;
+	while (str[i])
 	{
-		p_convs = ft_strchr(str, (int)(convs_char[i]));
+		p_convs = ft_strchr(convs_char, (int)(str[i]));
+
 		if (p_convs)
-			return (p_convs - str);
+			return (i + 1);
+		i++;
 	}
 	*is_valid = false;
 	convs_char = &(INVALID_CONVERSIONS[0]);
-	while (*convs_char && str[i])
+	while (str[i])
 	{
-		p_convs = ft_strchr(str, (int)(convs_char[i]));
+		p_convs = ft_strchr(convs_char, (int)(str[i]));
 		if (p_convs)
-			return (p_convs - str);
+			return (i + 1);
+		i++;
 	}
 	return (0);
 }
 
-size_t	check_period(const char *str, int str_size)
+size_t	check_period(const char *str, size_t str_size)
 {
 	char	*p;
 	size_t	i;
