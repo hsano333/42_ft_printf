@@ -6,12 +6,11 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/02 00:13:51 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/02 00:59:27 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdlib.h>
 
 void	parse_conversion(const char *str, t_conversion *convs)
 {
@@ -41,17 +40,15 @@ void	parse_conversion(const char *str, t_conversion *convs)
 	convs->conversion = str[convs->size - 1];
 }
 
-t_list **parse_str(const char *str, va_list* args)
+t_list **parse_str(const char *str)
 {
 	const char	*pp;
 	t_conversion	*convs;
 	t_list			**convs_list;
-	//void (*del_convs)(t_conversion*);
 	void (*del_convs)(void*);
 
 	convs_list = (t_list**)malloc(sizeof(t_list**));
 	convs_list[0] = NULL;
-	//convs_list = NULL;
 	del_convs = (void (*)())clear_conversion;
 	pp = ft_strchr(str, '%');
 	while (pp)
@@ -67,23 +64,6 @@ t_list **parse_str(const char *str, va_list* args)
 		pp = ft_strchr(++pp, '%');
 	}
 
-	//int i;
-	//i = 0;
-
-	t_list *tmp_list;
-	tmp_list = convs_list[0];
-	while(tmp_list)
-	{
-		info_conversion(tmp_list->content);
-		tmp_list = tmp_list->next;
-	}
-	printf("parse:%s/n",str);
-	pp = va_arg(*args, const char*);
-	if (pp != NULL)
-		printf("pp1:%s\n",pp);
-	//pp = va_arg(*args, const char*);
-	//printf("pp2:%s\n",pp);
-
 	return (convs_list);
 }
 
@@ -93,14 +73,26 @@ void ft_printf(const char *str, ...)
 	//const char	*pp;
 	//int			i;
 	t_list		**c_list;
-	t_conversion	*tmp;
+	//t_conversion	*tmp;
 	va_list args;
 
+	c_list = parse_str(str);
 	va_start(args, str);
-	c_list = parse_str(str, &args);
-	printf("%s\n",str);
-	tmp = (t_conversion*)c_list[0]->content;
-	printf("%zu",tmp->size);
+	print(str, c_list, &args);
+
+	t_list *tmp_list;
+	tmp_list = c_list[0];
+	/*
+	while(tmp_list)
+	{
+		info_conversion(tmp_list->content);
+		tmp_list = tmp_list->next;
+	}
+	*/
+
+	//printf("%s\n",str);
+	//tmp = (t_conversion*)c_list[0]->content;
+	//printf("%zu",tmp->size);
 
 	/*
 	 *
@@ -124,6 +116,5 @@ void ft_printf(const char *str, ...)
 	*/
 
 	printf("end\n");
-
 }
 
