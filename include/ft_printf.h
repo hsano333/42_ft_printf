@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:26:08 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/02 01:11:12 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/03 01:01:57 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define VALID_FLAG "-0# +"
 # define BASE_DIGIT "0123456789"
 # define BASE_HEX "0123456789ABCDEF"
+# define NULL_STR "(null)"
 
 # include <stdarg.h>
 # include <stdio.h>
@@ -56,6 +57,13 @@ void clear_conversion(t_conversion* node);
 void info_conversion(t_conversion *convs);
 void	print(const char *str, t_list* c_list, va_list* args);
 
+void	put_char(t_conversion *convs, char *word);
+void	put_str(t_conversion *convs, char *word);
+void	put_point(t_conversion *convs, char *word);
+void	put_int_digit(t_conversion *convs, int word);
+void	put_int_hex(t_conversion *convs, int word);
+void	ft_putnbr_base(long long nbr, char *base);
+void	ft_putpointer_base(unsigned long long nbrl, char *base);
 
 //TEST
 # include <stdio.h>
