@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/04 13:30:46 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 03:47:42 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,8 @@ void	parse_conversion(const char *str, t_conversion *convs)
 	convs->size = tmp_size;
 	convs->point = str;
 	middle_point = check_period(str, convs->size);
-	if (middle_point == 0)
-		middle_point = convs->size - 1;
-	//printf("No.0 str=%s\n", str);
-	//printf("No.1 str=%s,,middle_point=%zu\n",&(str[middle_point]), middle_point);
 	convs->mini_width = ft_atoin(str, middle_point, FRONT, &error);
-	//printf("No.1 error=%d\n",error);
-	//printf("No.2 str=%s,convs->mini_width=%d,middle_point=%zu\n",&(str[middle_point]),convs->mini_width, middle_point);
 	convs->precision = ft_atoin(&(str[middle_point]), convs->size - middle_point - 1, BACK, &error);
-	//printf("No.2 error=%d\n",error);
 	middle_point = where_label_last(str, middle_point);
 	convs->flag_minus = exist_char(str, '-', middle_point);
 	convs->flag_plus = exist_char(str, '+', middle_point);
@@ -43,6 +36,8 @@ void	parse_conversion(const char *str, t_conversion *convs)
 	convs->flag_zero = exist_char(str, '0', middle_point);
 	convs->valid = is_valid && !error;
 	convs->conversion = str[convs->size - 1];
+	convs->mem_err = false;
+	convs->minus_value = false;
 }
 
 t_list *parse_str(const char *str)
@@ -67,7 +62,7 @@ t_list *parse_str(const char *str)
 		}
 		parse_conversion(pp, convs);
 		ft_lstadd_back(convs_list, ft_lstnew(convs));
-		pp = ft_strchr(++pp, '%');
+		pp = ft_strchr(pp + convs->size + 1, '%');
 	}
 	return_list = convs_list[0];
 	free(convs_list);

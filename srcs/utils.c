@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:25:55 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/04 13:31:47 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 03:45:02 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int	exist_char(const char* str, char c,  size_t size)
 
 size_t	find_conversion(const char *str, int *is_valid)
 {
+	int		percent_flag;
 	size_t	i;
 	char	*p_convs;
 	char	*convs_char;
@@ -121,22 +122,20 @@ size_t	find_conversion(const char *str, int *is_valid)
 	convs_char = &(VALID_CONVERSIONS[0]);
 	*is_valid = true;
 	i = 1;
+	percent_flag = false;
 	while (str[i])
 	{
-		p_convs = ft_strchr(convs_char, (int)(str[i]));
-
+		p_convs = ft_strchr(convs_char, (int)(str[i++]));
 		if (p_convs)
-			return (i + 1);
-		i++;
+			return (i);
 	}
 	*is_valid = false;
 	convs_char = &(INVALID_CONVERSIONS[0]);
 	while (str[i])
 	{
-		p_convs = ft_strchr(convs_char, (int)(str[i]));
+		p_convs = ft_strchr(convs_char, (int)(str[i++]));
 		if (p_convs)
-			return (i + 1);
-		i++;
+			return (i);
 	}
 	return (0);
 }
@@ -145,10 +144,14 @@ size_t	check_period(const char *str, size_t str_size)
 {
 	char	*p;
 	size_t	i;
+	size_t	tmp_size;
 
 	i = 0;
 	p = ft_memchr(str, '.', str_size);
-	if (p)
-		return (p - str);
-	return (0);
+	if (!p)
+		return (str_size - 1);
+	tmp_size = p - str;
+	if (tmp_size == 0)
+		return (str_size - 1);
+	return (tmp_size);
 }
