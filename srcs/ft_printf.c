@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/02 01:37:46 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/04 13:30:46 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,20 @@ void	parse_conversion(const char *str, t_conversion *convs)
 	
 	error = false;
 	tmp_size = find_conversion(str, &is_valid);
-	if (tmp_size == 0)
+	if (tmp_size <= 1)
 		return ;
 	convs->size = tmp_size;
 	convs->point = str;
 	middle_point = check_period(str, convs->size);
 	if (middle_point == 0)
 		middle_point = convs->size - 1;
-	convs->mini_width = ft_atoin(str, middle_point, &error);
-	convs->precision = ft_atoin(&(str[middle_point]), convs->size - middle_point, &error);
+	//printf("No.0 str=%s\n", str);
+	//printf("No.1 str=%s,,middle_point=%zu\n",&(str[middle_point]), middle_point);
+	convs->mini_width = ft_atoin(str, middle_point, FRONT, &error);
+	//printf("No.1 error=%d\n",error);
+	//printf("No.2 str=%s,convs->mini_width=%d,middle_point=%zu\n",&(str[middle_point]),convs->mini_width, middle_point);
+	convs->precision = ft_atoin(&(str[middle_point]), convs->size - middle_point - 1, BACK, &error);
+	//printf("No.2 error=%d\n",error);
 	middle_point = where_label_last(str, middle_point);
 	convs->flag_minus = exist_char(str, '-', middle_point);
 	convs->flag_plus = exist_char(str, '+', middle_point);

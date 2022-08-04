@@ -6,12 +6,12 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:39:54 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/01 23:24:29 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/04 03:42:24 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define TRUE 1
-#define FALSE 0
+#include "../include/ft_printf.h"
+
 #define MINUS (-1)
 #define PLUSMINUS (1)
 #define OTHER 2
@@ -22,7 +22,7 @@
 #define THIRD 3
 #define ERROR -2
 
-unsigned int	check_base(char *base)
+static	unsigned int	check_base(char *base)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -32,24 +32,24 @@ unsigned int	check_base(char *base)
 	while (base[i])
 	{
 		if (base[i] == '+' || base[i] == '-')
-			return (FALSE);
+			return (false);
 		else if (base[i] == ' ' || (base[i] >= 0x09 && base[i] <= 0x0D))
-			return (FALSE);
+			return (false);
 		j = 0;
 		while (base[j])
 		{
 			if ((i != j) && (base[i] == base[j]))
-				return (FALSE);
+				return (false);
 			j++;
 		}
 		i++;
 	}
 	if (i <= 1)
-		return (FALSE);
+		return (false);
 	return (i);
 }
 
-int	check_word(char c, char *base, unsigned int *minus_cnt)
+static int	check_word(char c, char *base, unsigned int *minus_cnt)
 {
 	int	i;
 
@@ -72,10 +72,10 @@ int	check_word(char c, char *base, unsigned int *minus_cnt)
 			i++;
 		}
 	}
-	return (FALSE);
+	return (false);
 }
 
-void	set_number(char *dest, char *src, unsigned int *c, char *base)
+static void	set_number(char *dest, char *src, unsigned int *c, char *base)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -84,7 +84,7 @@ void	set_number(char *dest, char *src, unsigned int *c, char *base)
 
 	i = 0;
 	*c = 0;
-	zero_flag = FALSE;
+	zero_flag = false;
 	while (src[i] && check_word(src[i], base, &cnt) == NUMBER)
 	{
 		j = 0;
@@ -94,7 +94,7 @@ void	set_number(char *dest, char *src, unsigned int *c, char *base)
 			{
 				dest[*c] = j;
 				(*c)++;
-				zero_flag = TRUE;
+				zero_flag = true;
 				break ;
 			}
 			j++;
@@ -104,7 +104,7 @@ void	set_number(char *dest, char *src, unsigned int *c, char *base)
 	dest[*c] = '\0';
 }
 
-int	convert_char(char *char_array, char *str, char *base, unsigned int *size)
+static int	convert_char(char *char_array, char *str, char *base, unsigned int *size)
 {
 	unsigned int	minus_cnt;
 	unsigned int	tmp;
@@ -113,7 +113,7 @@ int	convert_char(char *char_array, char *str, char *base, unsigned int *size)
 	minus_cnt = 0;
 	while (check_word(str[*size], base, &tmp) == SPACE)
 		(*size)++;
-	if (check_word(str[*size], base, &tmp) == FALSE)
+	if (check_word(str[*size], base, &tmp) == false)
 		return (ERROR);
 	while (check_word(str[*size], base, &minus_cnt) == PLUSMINUS)
 		(*size)++;
@@ -123,19 +123,20 @@ int	convert_char(char *char_array, char *str, char *base, unsigned int *size)
 	return (minus_cnt);
 }
 
-int	ft_atoi_base(char *str, char *base)
+int	ft_atoi_base(char *str, char *base, int *err)
 {
 	unsigned int	array_size;
 	int				count;
 	char			char_array[200];
-	int				rval;
-	unsigned int	tmp;
+	long long		rval;
+	long long		tmp;
 
 	count = check_base(base);
-	if (convert_char(char_array, str, base, &array_size) == ERROR)
-		return (FALSE);
-	if (array_size == 0 || count <= 1)
-		return (FALSE);
+	//printf("atoi base str=%s\n",str);
+	if (convert_char(char_array, str, base, &array_size) == ERROR )
+		return (-1);
+	else if (array_size == 0 || count <= 1)
+		return (0);
 	array_size -= 1;
 	rval = char_array[array_size];
 	tmp = 1;
@@ -145,6 +146,8 @@ int	ft_atoi_base(char *str, char *base)
 		tmp *= count;
 		rval += char_array[array_size] * tmp;
 	}
+	if (rval > INT_MAX)
+		*err = true;
 	if (convert_char(char_array, str, base, &array_size) % 2 == 1)
 		return (rval * MINUS);
 	return (rval);
@@ -153,11 +156,13 @@ int	ft_atoi_base(char *str, char *base)
 //{
 //	char *str;
 //	char *str2;
+//	int err;
+//	err = 1;
 //	if (argc == 3)
 //	{
 //		str = argv[1];
 //		str2 = argv[2];
-//		printf("my  :[%d]\n",ft_atoi_base(str,str2));
+//		printf("my  :[%d]\n",ft_atoi_base(str,str2, &err));
 //		printf("atol:[%d]\n",atoi(str));
 //	}
 //}

@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:25:55 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/02 00:13:03 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/04 13:31:47 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,48 +32,61 @@ void clear_conversion(t_conversion* node)
 	free(node);
 }
 
-int	is_invalid_int_numbers(const char** str, size_t size)
+int	is_invalid_int_numbers(const char** str, size_t size, int mode)
 {
 	size_t	i;
 	size_t	first_digit;
 
-	i = 0;
-	while (!('1' <= (*str)[i] && (*str)[i] <= '9') && i < size)
-		(i)++;
-	first_digit = i;
-	while (('0' <= (*str)[i] && (*str)[i] <= '9') && i < size)
-		i++;
-	if (i - first_digit >= 11)
-		return (true);
+	if (mode == FRONT)
+	{
+		i = 0;
+		while (!('1' <= (*str)[i] && (*str)[i] <= '9') && i < size)
+			i++;
+		first_digit = i;
+		while (('0' <= (*str)[i] && (*str)[i] <= '9') && i < size)
+			i++;
+		if (i - first_digit >= 11)
+			return (true);
+	}
+	else
+	{
+		i = size - 1;
+		while (('0' <= (*str)[i] && (*str)[i] <= '9') && i > 0)
+			i--;
+		if (size - i >= 11)
+			return (true);
+		first_digit = ++i;
+	}
 	*str = &((*str)[first_digit]);
 	return (false);
 }
 
-size_t ft_atoin(const char* str, size_t size, int *error)
+int	ft_atoin(const char* str, size_t size, int mode, int *error)
 {
 	char	*p;
 	int		tmp_int;
 	int		tmp_error;
 
-	tmp_error = is_invalid_int_numbers(&str, size);
+	//printf("No.1 size=%zu, str=%s",size,str);
+	tmp_error = is_invalid_int_numbers(&str, size, mode);
 	if (tmp_error)
 	{
 		*error = true;
-		return (0);
+		return (-2);
 	}
+	//printf("No.2 size=%zu, str=%s",size,str);
 	p = ft_substr(str, 0, size);
 	if (!p)
 	{
 		*error = true;
-		return (0);
+		return (-2);
 	}
-	tmp_int = ft_atoi(p, error);
+	tmp_int = ft_atoi_base(p, BASE_DIGIT, error);
 	free(p);
-	if (tmp_int < 0)
-	{
-		*error = true;
-		return (0);
-	}
+	if (*error)
+		return (-2);
+	//if (size == 0 || (tmp_int == 0 && p[size - 1] != '0'))
+		//return (-1);
 	return (tmp_int);
 }
 
