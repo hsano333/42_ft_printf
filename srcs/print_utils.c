@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:11:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 01:03:03 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 01:35:44 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,12 @@ int	get_padding_len(t_conversion *convs, char *str, int str_len)
 	else
 		len = 0;
 	return (len);
+}
+
+size_t	ft_putstr_fd_wrapper(char *str, int fd)
+{
+	if (!str)
+		return (0);
+	ft_putstr_fd(str, fd);
+	return (ft_strlen(str));
 }

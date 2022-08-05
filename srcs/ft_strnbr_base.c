@@ -6,11 +6,11 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 09:34:44 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 10:59:15 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 01:51:14 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "common.h"
 
 #define ZERO "0"
 #define LLMIN_STR "-922337203685477580"

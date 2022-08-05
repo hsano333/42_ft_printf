@@ -6,12 +6,12 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 01:01:17 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 01:44:15 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "parse.h"
+#include "common.h"
 
 size_t	find_conversion(const char *str, int *is_valid)
 {
@@ -39,14 +39,6 @@ size_t	find_conversion(const char *str, int *is_valid)
 			return (i);
 	}
 	return (0);
-}
-
-void	init_convs(t_conversion *convs)
-{
-	convs->mem_err = true;
-	convs->arg_len = 0;
-	convs->mem_err = false;
-	convs->minus_value = false;
 }
 
 void	parse_conversion(const char *str, t_conversion *convs)
@@ -107,4 +99,33 @@ size_t	where_label_last(const char *str, size_t size)
 		i++;
 	}
 	return (i);
+}
+
+t_list	*parse_str(const char *str)
+{
+	const char		*pp;
+	t_conversion	*convs;
+	t_list			**convs_list;
+	t_list			*return_list;
+	void			(*del_convs)(void *);
+
+	convs_list = (t_list **)malloc(sizeof(t_list **));
+	convs_list[0] = NULL;
+	del_convs = (void (*)())clear_conversion;
+	pp = ft_strchr(str, '%');
+	while (pp)
+	{
+		convs = (t_conversion *)malloc(sizeof(t_conversion));
+		if (!convs)
+		{
+			ft_lstclear(convs_list, del_convs);
+			return (NULL);
+		}
+		parse_conversion(pp, convs);
+		ft_lstadd_back(convs_list, ft_lstnew(convs));
+		pp = ft_strchr(pp + convs->size, '%');
+	}
+	return_list = convs_list[0];
+	free(convs_list);
+	return (return_list);
 }

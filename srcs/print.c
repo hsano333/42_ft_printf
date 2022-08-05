@@ -6,14 +6,15 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 01:02:37 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 01:49:42 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "print.h"
+#include "common.h"
 
-size_t	put_raw(const char *str, t_conversion *convs)
+static size_t	put_raw(const char *str, t_conversion *convs)
 {
 	size_t	len;
 
@@ -22,7 +23,7 @@ size_t	put_raw(const char *str, t_conversion *convs)
 	return (len);
 }
 
-int	put_word(t_conversion *convs, va_list *args, char *(*get_str)(va_list *, \
+static int	put_word(t_conversion *convs, va_list *args, char *(*get_str)(va_list *, \
 		   	t_conversion *convs))
 {
 	char	padding;
@@ -46,7 +47,7 @@ int	put_word(t_conversion *convs, va_list *args, char *(*get_str)(va_list *, \
 	return (true);
 }
 
-void	swtiching_valid(t_conversion *convs)
+static void	swtiching_valid(t_conversion *convs)
 {
 	char	c;
 
@@ -66,7 +67,7 @@ void	swtiching_valid(t_conversion *convs)
 	}
 }
 
-size_t	put_converted_word(t_conversion *convs, va_list *args)
+static size_t	put_converted_word(t_conversion *convs, va_list *args)
 {
 	if (convs->valid == false)
 		return (write(1, convs->point, convs->size));
@@ -91,3 +92,33 @@ size_t	put_converted_word(t_conversion *convs, va_list *args)
 		put_word(convs, args, get_str_percent);
 	return (convs->size);
 }
+
+int	print(const char *str, t_list *convs_list, va_list *args)
+{
+	size_t			i;
+	int				print_size;
+	void			(*del_convs)(void *);
+	t_list			*head_convs_list;
+	t_conversion	*convs;
+
+	del_convs = (void (*)())clear_conversion;
+	i = 0;
+	print_size = 0;
+	head_convs_list = convs_list;
+	while (convs_list)
+	{
+		convs = (t_conversion *)convs_list->content;
+		print_size += convs->point - str - i;
+		i += put_raw(&(str[i]), convs);
+		i += put_converted_word(convs, args);
+		if (convs->mem_err == true)
+			break ;
+		print_size += convs->print_size;
+		convs_list = convs_list->next;
+	}
+	if (((char *)str)[i])
+		print_size += ft_putstr_fd_wrapper(&(((char *)str)[i]), 1);
+	ft_lstclear(&head_convs_list, del_convs);
+	return (print_size);
+}
+

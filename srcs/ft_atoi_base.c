@@ -6,11 +6,11 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:39:54 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 10:58:44 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 01:50:46 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "common.h"
 
 #define MINUS (-1)
 #define PLUSMINUS (1)

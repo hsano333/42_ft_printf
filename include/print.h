@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 00:53:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 01:20:58 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 01:49:45 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define BASE_HEX_LOWER "0123456789abcdef"
 # define NULL_STR "(null)"
 
-# include "ft_printf.h"
+#include "common.h"
 
 char			*get_str_char(va_list *args, t_conversion *convs);
 char			*get_str_str(va_list *args, t_conversion *convs);
@@ -33,6 +33,6 @@ size_t			put_flag_minus(t_conversion *convs, char *str, \
 				int padding_len, char padding);
 size_t			put_except_minus(t_conversion *convs, char *str, \
 				int padding_len, char padding);
-size_t			put_raw(const char *str, t_conversion *convs);
-size_t			put_converted_word(t_conversion *convs, va_list *args);
+size_t			ft_putstr_fd_wrapper(char *str, int fd);
+int				print(const char *str, t_list *convs_list, va_list *args);
 #endif
