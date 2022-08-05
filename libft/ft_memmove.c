@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 23:22:52 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/01 02:50:59 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 15:30:18 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	else
 	{
 		i = len;
-		dst_p = (unsigned char *)&(dst[len - 1]);
-		src_p = (unsigned char *)&(src[len - 1]);
+		dst_p = (unsigned char *)(&(((unsigned char*)dst)[len - 1]));
+		src_p = (unsigned char *)(&(((unsigned char*)src)[len - 1]));
 		while (i--)
 			*(dst_p--) = *(src_p--);
 	}

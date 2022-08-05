@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 13:54:05 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 16:44:12 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	put_word(t_conversion *convs, va_list *args, char *(*get_str)(va_list *, \
 	if ((convs->flag_zero) && !convs->flag_minus)
 		padding = '0';
 	if (convs->flag_minus)
-		put_flag_minus(convs, str, padding_len, padding);
+		convs->print_size = put_flag_minus(convs, str, padding_len, padding);
 	else
-		put_except_flag_minus(convs, str, padding_len, padding);
+		convs->print_size = put_except_flag_minus(convs, str, padding_len, padding);
 	free(str);
 	return (true);
 }

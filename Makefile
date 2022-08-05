@@ -1,7 +1,8 @@
 
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -I ${HEAD}
+#CFLAGS	= -Wall -Wextra -Werror -I ${HEAD}
+CFLAGS	= -I ${HEAD}
 NAME 	= libftprintf.a
 LIBFT = ./libft
 PRE		= ./srcs/

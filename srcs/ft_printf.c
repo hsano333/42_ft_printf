@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 15:14:16 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 16:52:42 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_list	*parse_str(const char *str)
 		}
 		parse_conversion(pp, convs);
 		ft_lstadd_back(convs_list, ft_lstnew(convs));
-		pp = ft_strchr(pp + convs->size + 1, '%');
+		pp = ft_strchr(pp + convs->size, '%');
 	}
 	return_list = convs_list[0];
 	free(convs_list);
@@ -46,24 +46,22 @@ static size_t	print(const char *str, t_list *convs_list, va_list *args)
 	int		error;
 	size_t	i;
 	size_t	print_size;
-	//t_list	*convs_list;
 	t_conversion *convs;
 	void			(*del_convs)(void *);
 
 	del_convs = (void (*)())clear_conversion;
 	error = true;
-	//convs_list = c_list;
 	i = 0;
 	print_size = 0;
 	while (convs_list)
 	{
 		convs = (t_conversion *)convs_list->content;
-		//info_conversion(convs);
 		i += put_raw(&(str[i]), convs);
 		i += put_converted_word(convs, args, &error);
 		if (error == false)
 			return (0);
 		print_size += convs->print_size;
+		//info_conversion(convs);
 		convs_list = convs_list->next;
 	}
 	if (convs_list == NULL)
