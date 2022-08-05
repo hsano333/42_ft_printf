@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:02:21 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 01:02:54 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 04:52:12 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 char	*get_str_char(va_list *args, t_conversion *convs)
 {
 	int		word_input;
-	char	word;
 	char	*p;
 
 	word_input = (char)va_arg(*args, int);
@@ -43,7 +42,10 @@ char	*get_str_str(va_list *args, t_conversion *convs)
 		str = ft_strdup(word);
 	if (!str)
 		return (NULL);
-	str_r = ft_substr(str, 0, convs->precision);
+	if (convs->precision > 0 || convs->precision == -1)
+		str_r = ft_substr(str, 0, convs->precision);
+	else
+		str_r = ft_strdup("");
 	free(str);
 	if (!str_r)
 		return (NULL);

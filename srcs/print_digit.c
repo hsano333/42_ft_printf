@@ -6,11 +6,10 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 22:44:24 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 02:49:06 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 04:22:45 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "print.h"
 
 static char	*add_zero(char *src, t_conversion *convs)

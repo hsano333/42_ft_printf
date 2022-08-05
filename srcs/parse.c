@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 01:44:15 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 04:55:29 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,34 +41,6 @@ size_t	find_conversion(const char *str, int *is_valid)
 	return (0);
 }
 
-void	parse_conversion(const char *str, t_conversion *convs)
-{
-	int		is_valid;
-	int		error;
-	size_t	tmp_size;
-	size_t	middle_point;
-
-	error = false;
-	init_convs(convs);
-	tmp_size = find_conversion(str, &is_valid);
-	if (tmp_size <= 1)
-		return ;
-	convs->size = tmp_size;
-	convs->point = str;
-	middle_point = check_period(str, convs->size);
-	convs->mini_width = ft_atoin(str, middle_point, FRONT, &error);
-	convs->precision = ft_atoin(&(str[middle_point]), convs->size - middle_point
-			- 1, BACK, &error);
-	middle_point = where_label_last(str, middle_point);
-	convs->flag_minus = exist_char(str, '-', middle_point);
-	convs->flag_plus = exist_char(str, '+', middle_point);
-	convs->flag_sharp = exist_char(str, '#', middle_point);
-	convs->flag_space = exist_char(str, ' ', middle_point);
-	convs->flag_zero = exist_char(str, '0', middle_point);
-	convs->valid = is_valid && !error;
-	convs->conversion = str[convs->size - 1];
-}
-
 size_t	check_period(const char *str, size_t str_size)
 {
 	char	*p;
@@ -99,6 +71,34 @@ size_t	where_label_last(const char *str, size_t size)
 		i++;
 	}
 	return (i);
+}
+
+void	parse_conversion(const char *str, t_conversion *convs)
+{
+	int		is_valid;
+	int		error;
+	size_t	tmp_size;
+	size_t	middle_point;
+
+	error = false;
+	init_convs(convs);
+	tmp_size = find_conversion(str, &is_valid);
+	if (tmp_size <= 1)
+		return ;
+	convs->size = tmp_size;
+	convs->point = str;
+	middle_point = check_period(str, convs->size);
+	convs->mini_width = ft_atoin(str, middle_point, FRONT, &error);
+	convs->precision = ft_atoin(&(str[middle_point]), \
+			convs->size - middle_point - 1, BACK, &error);
+	middle_point = where_label_last(str, middle_point);
+	convs->flag_minus = exist_char(str, '-', middle_point);
+	convs->flag_plus = exist_char(str, '+', middle_point);
+	convs->flag_sharp = exist_char(str, '#', middle_point);
+	convs->flag_space = exist_char(str, ' ', middle_point);
+	convs->flag_zero = exist_char(str, '0', middle_point);
+	convs->valid = is_valid && !error;
+	convs->conversion = str[convs->size - 1];
 }
 
 t_list	*parse_str(const char *str)

@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:25:55 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 01:32:45 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 04:58:10 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,14 @@ int	ft_atoin(const char *str, size_t size, int mode, int *error)
 	int		tmp_int;
 	int		tmp_error;
 
+	if (size == 0 && mode == BACK)
+		return (-1);
+	else if (size == 1 && mode == BACK)
+		return (0);
+	/*
+	if (size == 1 || mode == BACK)
+		return (0);
+	*/
 	tmp_error = is_invalid_int_numbers(&str, size, mode);
 	if (tmp_error)
 	{
