@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:11:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 14:27:01 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 15:10:35 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ size_t	put_except_flag_minus(t_conversion *convs, char *str, int padding_len,
 		print_size += write(1, " ", 1);
 	while (padding == '0' && padding_len--)
 		print_size += write(1, &padding, 1);
+	//printf("No.1 size=%zu, str=[%s]\n", ft_strlen(str),str);
 	print_size += ft_putstr_fd(str, 1);
 	return (print_size);
 }

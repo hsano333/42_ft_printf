@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:02:21 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 11:38:36 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 15:09:52 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*get_str_char(va_list *args, t_conversion *convs)
 	p[0] = word;
 	p[1] = '\0';
 	convs->mem_err = false;
+	//printf("test get_str_char p=[%s]\n",p);
+	//printf("test end\n");
 	return (p);
 }
 

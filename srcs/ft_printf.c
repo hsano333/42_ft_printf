@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 14:45:12 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 15:14:16 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static size_t	print(const char *str, t_list *convs_list, va_list *args)
 	while (convs_list)
 	{
 		convs = (t_conversion *)convs_list->content;
+		//info_conversion(convs);
 		i += put_raw(&(str[i]), convs);
 		i += put_converted_word(convs, args, &error);
 		if (error == false)
@@ -66,7 +67,7 @@ static size_t	print(const char *str, t_list *convs_list, va_list *args)
 		convs_list = convs_list->next;
 	}
 	if (convs_list == NULL)
-		print_size += ft_putstr_fd((char *)str, 1);
+		print_size += ft_putstr_fd(&(((char *)str)[i]), 1);
 	ft_lstclear(&convs_list, del_convs);
 	return (print_size);
 }
