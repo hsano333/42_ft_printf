@@ -6,21 +6,19 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:02:21 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 03:15:42 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 11:38:36 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-//void	get_str_char(t_conversion *convs, char word)
-char	*get_str_char(va_list* args, t_conversion *convs)
+char	*get_str_char(va_list *args, t_conversion *convs)
 {
 	char	word;
 	char	*p;
 
 	convs->mem_err = true;
 	word = (char)va_arg(*args, int);
-	//printf("%%c:test:word=%d\n",word);
 	p = malloc(2);
 	if (!p)
 		return (NULL);
@@ -30,7 +28,7 @@ char	*get_str_char(va_list* args, t_conversion *convs)
 	return (p);
 }
 
-char	*get_str_str(va_list* args, t_conversion *convs)
+char	*get_str_str(va_list *args, t_conversion *convs)
 {
 	char	*word;
 	char	*str;
@@ -48,7 +46,8 @@ char	*get_str_str(va_list* args, t_conversion *convs)
 	convs->mem_err = false;
 	return (str_r);
 }
-char	*get_str_percent(va_list* args, t_conversion *convs)
+
+char	*get_str_percent(va_list *args, t_conversion *convs)
 {
 	char	*str;
 
@@ -60,22 +59,16 @@ char	*get_str_percent(va_list* args, t_conversion *convs)
 		return (NULL);
 	convs->mem_err = false;
 	return (str);
-
 }
 
-char	*get_str_point(va_list* args, t_conversion *convs)
+char	*get_str_point(va_list *args, t_conversion *convs)
 {
-	//unsigned long long p;
 	unsigned long long	word;
 	char				*str;
 	char				*str_r;
-	//char 				*p;
 
 	convs->mem_err = true;
-	//p = va_arg(*args, char*);
-	word = (unsigned long long)va_arg(*args, char*);
-	//p = (unsigned long long)word;
-	//if (convs->conversion == 'p')
+	word = (unsigned long long)va_arg(*args, char *);
 	str = ft_strpointer_base(word, BASE_HEX_LOWER);
 	if (!str)
 		return (NULL);

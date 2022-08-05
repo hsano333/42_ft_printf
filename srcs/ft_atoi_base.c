@@ -6,11 +6,11 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 12:39:54 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/04 03:42:24 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 10:58:44 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "ft_printf.h"
 
 #define MINUS (-1)
 #define PLUSMINUS (1)
@@ -22,7 +22,7 @@
 #define THIRD 3
 #define ERROR -2
 
-static	unsigned int	check_base(char *base)
+static unsigned int	check_base(char *base)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -104,7 +104,8 @@ static void	set_number(char *dest, char *src, unsigned int *c, char *base)
 	dest[*c] = '\0';
 }
 
-static int	convert_char(char *char_array, char *str, char *base, unsigned int *size)
+static int	convert_char(char *char_array, char *str, char *base,
+		unsigned int *size)
 {
 	unsigned int	minus_cnt;
 	unsigned int	tmp;
@@ -132,8 +133,7 @@ int	ft_atoi_base(char *str, char *base, int *err)
 	long long		tmp;
 
 	count = check_base(base);
-	//printf("atoi base str=%s\n",str);
-	if (convert_char(char_array, str, base, &array_size) == ERROR )
+	if (convert_char(char_array, str, base, &array_size) == ERROR)
 		return (-1);
 	else if (array_size == 0 || count <= 1)
 		return (0);

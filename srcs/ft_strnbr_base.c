@@ -6,20 +6,17 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 09:34:44 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/04 16:55:42 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 10:59:15 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "ft_printf.h"
-# include <limits.h>
 
-#define SAVED 1
-#define ZERO "0 "
-#define MINUSSTR "-"
+#define ZERO "0"
 #define LLMIN_STR "-922337203685477580"
 
-static char	*put_base(unsigned long long nbr, char *base, unsigned int count, int minus)
+static char	*put_base(unsigned long long nbr, char *base, unsigned int count,
+		int minus)
 {
 	int		i;
 	int		tmp_i;
@@ -40,7 +37,7 @@ static char	*put_base(unsigned long long nbr, char *base, unsigned int count, in
 	swap[i] = '\0';
 	i--;
 	tmp_i = 0;
-	while(tmp_i <= i)
+	while (tmp_i <= i)
 	{
 		swap[i - tmp_i] = array[tmp_i];
 		tmp_i++;
@@ -73,16 +70,16 @@ static unsigned int	check_base(char *base)
 	return (i);
 }
 
-static char *check_min(long long nbr,int *minus, int *err)
+static char	*check_min(long long nbr, int *minus, int *err)
 {
-	char *p;
+	char	*p;
 
 	*err = false;
 	if (nbr == LLONG_MIN || nbr == 0)
 	{
 		if (nbr == LLONG_MIN)
 			p = malloc(20);
-		else 
+		else
 			p = malloc(2);
 		if (!p)
 		{
@@ -91,7 +88,7 @@ static char *check_min(long long nbr,int *minus, int *err)
 		}
 		if (nbr == LLONG_MIN)
 			ft_strlcpy(p, &LLMIN_STR[0], 20);
-		else 
+		else
 			ft_strlcpy(p, &ZERO[0], 2);
 		return (p);
 	}
@@ -101,14 +98,13 @@ static char *check_min(long long nbr,int *minus, int *err)
 	return (NULL);
 }
 
-
 char	*ft_strnbr_base(long long nbr, char *base)
 {
 	int					minus;
+	int					err;
+	char				*p;
 	unsigned long long	nbrl;
 	unsigned int		count;
-	char				*p;
-	int					err;
 
 	p = check_min(nbr, &minus, &err);
 	if (p != NULL || err == true)
@@ -124,9 +120,9 @@ char	*ft_strnbr_base(long long nbr, char *base)
 
 char	*ft_strpointer_base(unsigned long long nbrl, char *base)
 {
-	unsigned int		count;
-	int					minus;
-	char *p;
+	unsigned int	count;
+	int				minus;
+	char			*p;
 
 	minus = 1;
 	if (nbrl == 0)
