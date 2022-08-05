@@ -6,7 +6,7 @@ NAME 	= libftprintf.a
 LIBFT = ./libft
 PRE		= ./srcs/
 HEAD	= ./include
-SRC		= ft_printf.c parse.c parse_utils.c utils.c ft_atoi_base.c print.c ft_strnbr_base.c print_digit.c print_str.c
+SRC		= ft_printf.c parse.c parse_utils.c utils.c ft_atoi_base.c print.c ft_strnbr_base.c print_digit.c print_str.c print_utils.c
 SRCS	= ${addprefix ${PRE}, ${SRC}}
 OBJS	= $(SRCS:.c=.o)
 LIBFTNAME = libft.a

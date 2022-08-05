@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 11:36:23 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 13:01:00 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ size_t	put_raw(const char *str, t_conversion *convs)
 	return (len);
 }
 
-int	put_word(t_conversion *convs, va_list *args, char *(*get_str)(va_list *,
-			t_conversion *convs))
+int	put_word(t_conversion *convs, va_list *args, char *(*get_str)(va_list *, \
+		   	t_conversion *convs))
 {
 	char	padding;
 	char	*str;
@@ -42,6 +42,7 @@ int	put_word(t_conversion *convs, va_list *args, char *(*get_str)(va_list *,
 	else
 		put_except_flag_minus(convs, str, padding_len, padding);
 	free(str);
+	return (true);
 }
 
 void	swtiching_valid(t_conversion *convs)

@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:26:08 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 11:41:09 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 12:51:09 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,10 @@ char			*get_str_int_lower_hex(va_list *args, t_conversion *convs);
 char			*get_str_percent(va_list *args, t_conversion *convs);
 char			*ft_strnbr_base(long long nbr, char *base);
 char			*ft_strpointer_base(unsigned long long nbrl, char *base);
+t_list			*parse_str(const char *str);
+int				get_padding_len(t_conversion *convs, char *str, int str_len);
+void			put_flag_minus(t_conversion *convs, char *str, int padding_len,  \
+				char padding);
+void			put_except_flag_minus(t_conversion *convs, char *str, int padding_len, \
+				char padding);
 #endif
