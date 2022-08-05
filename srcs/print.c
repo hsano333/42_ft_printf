@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 01:49:42 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 02:17:13 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ static void	swtiching_valid(t_conversion *convs)
 	}
 	if (c == 'c' || c == 's' || c == 'u' || c == 'd' || c == 'i')
 		convs->flag_sharp = false;
+	if (c == 'c' || c == 's' || c == 'p')
+		convs->flag_zero = false;
 	if (c == 'p')
 	{
-		convs->flag_zero = false;
 		convs->flag_minus = false;
 		convs->flag_sharp = true;
 	}
