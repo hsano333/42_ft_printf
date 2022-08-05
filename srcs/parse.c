@@ -6,11 +6,12 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 00:48:59 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 01:01:17 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "parse.h"
 
 size_t	find_conversion(const char *str, int *is_valid)
 {

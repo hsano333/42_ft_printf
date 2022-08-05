@@ -6,11 +6,13 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 00:43:09 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 01:18:13 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "print.h"
+#include "parse.h"
 
 static t_list	*parse_str(const char *str)
 {

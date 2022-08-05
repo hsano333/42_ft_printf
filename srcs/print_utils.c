@@ -6,11 +6,12 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:11:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 00:42:30 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 01:03:03 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "print.h"
 
 size_t	put_flag_minus(t_conversion *convs, char *str, int padding_len,
 		char padding)

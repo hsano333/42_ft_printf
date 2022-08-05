@@ -6,11 +6,12 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 00:39:27 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 01:02:37 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "print.h"
 
 size_t	put_raw(const char *str, t_conversion *convs)
 {

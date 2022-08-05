@@ -6,11 +6,12 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:25:55 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 00:36:44 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 01:09:42 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "parse.h"
 
 void	clear_conversion(t_conversion *node)
 {

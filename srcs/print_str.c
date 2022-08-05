@@ -6,11 +6,12 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:02:21 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 00:47:53 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 01:02:54 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "print.h"
 
 char	*get_str_char(va_list *args, t_conversion *convs)
 {
@@ -37,7 +38,7 @@ char	*get_str_str(va_list *args, t_conversion *convs)
 
 	word = va_arg(*args, char *);
 	if (word == NULL)
-		str = ft_strdup("(null)");
+		str = ft_strdup(NULL_STR);
 	else
 		str = ft_strdup(word);
 	if (!str)
