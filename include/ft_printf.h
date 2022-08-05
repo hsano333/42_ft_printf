@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:26:08 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 13:07:48 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 14:14:48 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_conversion
 	int			valid;
 	int			mem_err;
 	int			minus_value;
+	size_t		print_size;
 }				t_conversion;
 
 int				ft_atoi_base(char *str, char *base, int *err);
@@ -54,7 +55,6 @@ size_t			where_label_last(const char *str, size_t size);
 int				exist_char(const char *str, char c, size_t size);
 void			clear_conversion(t_conversion *node);
 void			info_conversion(t_conversion *convs);
-void			print(const char *str, t_list *c_list, va_list *args);
 char			*get_str_char(va_list *args, t_conversion *convs);
 char			*get_str_str(va_list *args, t_conversion *convs);
 char			*get_str_point(va_list *args, t_conversion *convs);
@@ -65,10 +65,11 @@ char			*get_str_int_lower_hex(va_list *args, t_conversion *convs);
 char			*get_str_percent(va_list *args, t_conversion *convs);
 char			*ft_strnbr_base(long long nbr, char *base);
 char			*ft_strpointer_base(unsigned long long nbrl, char *base);
-t_list			*parse_str(const char *str);
 int				get_padding_len(t_conversion *convs, char *str, int str_len);
-void			put_flag_minus(t_conversion *convs, char *str, \
+size_t			put_flag_minus(t_conversion *convs, char *str, \
 				int padding_len, char padding);
-void			put_except_flag_minus(t_conversion *convs, char *str, \
+size_t			put_except_flag_minus(t_conversion *convs, char *str, \
 				int padding_len, char padding);
+size_t			put_raw(const char *str, t_conversion *convs);
+size_t			put_converted_word(t_conversion *convs, va_list *args, int *error);
 #endif

@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 13:01:00 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 13:54:05 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,24 +91,3 @@ size_t	put_converted_word(t_conversion *convs, va_list *args, int *error)
 	return (convs->size);
 }
 
-void	print(const char *str, t_list *c_list, va_list *args)
-{
-	int		error;
-	size_t	i;
-	t_list	*tmp_list;
-
-	error = true;
-	if (c_list == NULL)
-		ft_putstr_fd((char *)str, 1);
-	tmp_list = c_list;
-	i = 0;
-	while (tmp_list)
-	{
-		i += put_raw(&(str[i]), tmp_list->content);
-		i += put_converted_word(tmp_list->content, args, &error);
-		if (error == false)
-			return ;
-		tmp_list = tmp_list->next;
-	}
-	ft_putstr_fd((char *)&(str[i]), 1);
-}

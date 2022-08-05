@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 11:08:28 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 13:54:05 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,31 +101,3 @@ size_t	where_label_last(const char *str, size_t size)
 	return (i);
 }
 
-t_list	*parse_str(const char *str)
-{
-	const char		*pp;
-	t_conversion	*convs;
-	t_list			**convs_list;
-	t_list			*return_list;
-	void			(*del_convs)(void *);
-
-	convs_list = (t_list **)malloc(sizeof(t_list **));
-	convs_list[0] = NULL;
-	del_convs = (void (*)())clear_conversion;
-	pp = ft_strchr(str, '%');
-	while (pp)
-	{
-		convs = (t_conversion *)malloc(sizeof(t_conversion));
-		if (!convs)
-		{
-			ft_lstclear(convs_list, del_convs);
-			return (NULL);
-		}
-		parse_conversion(pp, convs);
-		ft_lstadd_back(convs_list, ft_lstnew(convs));
-		pp = ft_strchr(pp + convs->size + 1, '%');
-	}
-	return_list = convs_list[0];
-	free(convs_list);
-	return (return_list);
-}
