@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 22:44:24 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 23:26:04 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 00:47:31 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ char	*get_str_uint_digit(va_list *args, t_conversion *convs)
 	char			*str;
 	char			*str_r;
 
-	convs->mem_err = true;
-	convs->arg_len = 0;
 	word = va_arg(*args, unsigned int);
 	str = ft_strnbr_base(word, BASE_DIGIT);
 	if (!str)
@@ -67,8 +65,6 @@ char	*get_str_int_digit(va_list *args, t_conversion *convs)
 	char		*str;
 	char		*str_r;
 
-	convs->mem_err = true;
-	convs->arg_len = 0;
 	word = va_arg(*args, int);
 	if (word < 0)
 	{
@@ -94,8 +90,6 @@ char	*get_str_int_upper_hex(va_list *args, t_conversion *convs)
 	char				*str;
 	char				*str_r;
 
-	convs->mem_err = true;
-	convs->arg_len = 0;
 	word = (unsigned long long)va_arg(*args, unsigned int);
 	str = ft_strnbr_base(word, BASE_HEX_UPPER);
 	if (!str)
@@ -125,8 +119,6 @@ char	*get_str_int_lower_hex(va_list *args, t_conversion *convs)
 	char				*str;
 	char				*str_r;
 
-	convs->mem_err = true;
-	convs->arg_len = 0;
 	word = (unsigned long long)va_arg(*args, unsigned int);
 	str = ft_strnbr_base(word, BASE_HEX_LOWER);
 	if (!str)

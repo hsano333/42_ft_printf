@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:26:08 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 23:14:06 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 00:41:48 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char			*ft_strpointer_base(unsigned long long nbrl, char *base);
 int				get_padding_len(t_conversion *convs, char *str, int str_len);
 size_t			put_flag_minus(t_conversion *convs, char *str, \
 				int padding_len, char padding);
-size_t			put_except_flag_minus(t_conversion *convs, char *str, \
+size_t			put_except_minus(t_conversion *convs, char *str, \
 				int padding_len, char padding);
 size_t			put_raw(const char *str, t_conversion *convs);
 size_t			put_converted_word(t_conversion *convs, va_list *args);

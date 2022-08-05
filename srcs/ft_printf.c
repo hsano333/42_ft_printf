@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 00:10:23 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 00:43:09 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,16 @@ static size_t	ft_putstr_fd_wrapper(char *str, int fd)
 	if (!str)
 		return (0);
 	ft_putstr_fd(str, fd);
-	//printf("last str size=%d\n",ft_strlen(str));
 	return (ft_strlen(str));
 }
 
 static size_t	print(const char *str, t_list *convs_list, va_list *args)
 {
-	size_t	i;
-	size_t	print_size;
-	t_conversion *convs;
+	size_t			i;
+	size_t			print_size;
 	void			(*del_convs)(void *);
-	t_list *head_convs_list;
+	t_list			*head_convs_list;
+	t_conversion	*convs;
 
 	del_convs = (void (*)())clear_conversion;
 	i = 0;
@@ -71,7 +70,6 @@ static size_t	print(const char *str, t_list *convs_list, va_list *args)
 		if (convs->mem_err == true)
 			break ;
 		print_size += convs->print_size;
-		//info_conversion(convs);
 		convs_list = convs_list->next;
 	}
 	if (((char *)str)[i])
@@ -87,5 +85,5 @@ int	ft_printf(const char *str, ...)
 
 	c_list = parse_str(str);
 	va_start(args, str);
-	return (int)(print(str, c_list, &args));
+	return ((int)(print(str, c_list, &args)));
 }

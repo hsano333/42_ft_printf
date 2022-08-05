@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 13:54:05 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 00:48:59 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ size_t	find_conversion(const char *str, int *is_valid)
 	return (0);
 }
 
+void	init_convs(t_conversion *convs)
+{
+	convs->mem_err = true;
+	convs->arg_len = 0;
+	convs->mem_err = false;
+	convs->minus_value = false;
+}
+
 void	parse_conversion(const char *str, t_conversion *convs)
 {
 	int		is_valid;
@@ -48,6 +56,7 @@ void	parse_conversion(const char *str, t_conversion *convs)
 	size_t	middle_point;
 
 	error = false;
+	init_convs(convs);
 	tmp_size = find_conversion(str, &is_valid);
 	if (tmp_size <= 1)
 		return ;
@@ -65,8 +74,6 @@ void	parse_conversion(const char *str, t_conversion *convs)
 	convs->flag_zero = exist_char(str, '0', middle_point);
 	convs->valid = is_valid && !error;
 	convs->conversion = str[convs->size - 1];
-	convs->mem_err = false;
-	convs->minus_value = false;
 }
 
 size_t	check_period(const char *str, size_t str_size)
@@ -100,4 +107,3 @@ size_t	where_label_last(const char *str, size_t size)
 	}
 	return (i);
 }
-

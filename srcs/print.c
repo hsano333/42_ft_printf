@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 23:56:37 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 00:39:27 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ size_t	put_raw(const char *str, t_conversion *convs)
 	size_t	len;
 
 	len = convs->point - str;
-	//printf("\nraw size:len=[%zu]\n",len);
 	write(1, str, len);
 	return (len);
 }
@@ -41,7 +40,7 @@ int	put_word(t_conversion *convs, va_list *args, char *(*get_str)(va_list *, \
 	if (convs->flag_minus)
 		convs->print_size = put_flag_minus(convs, str, padding_len, padding);
 	else
-		convs->print_size = put_except_flag_minus(convs, str, padding_len, padding);
+		convs->print_size = put_except_minus(convs, str, padding_len, padding);
 	free(str);
 	return (true);
 }
@@ -91,4 +90,3 @@ size_t	put_converted_word(t_conversion *convs, va_list *args)
 		put_word(convs, args, get_str_percent);
 	return (convs->size);
 }
-

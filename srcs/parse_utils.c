@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:25:55 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 21:50:52 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 00:36:44 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,23 +77,22 @@ int	exist_char(const char *str, char c, size_t size)
 		return (true);
 	return (false);
 }
-
 //
-void	info_conversion(t_conversion *convs)
-{
-	printf("\ninfo:convs->point:[%s]\n", convs->point);
-	printf("convs->size:%zu\n", convs->size);
-	printf("convs->conversion:%c\n", convs->conversion);
-	printf("convs->mini_width:%d\n", convs->mini_width);
-	printf("convs->precision:%d\n", convs->precision);
-	printf("convs->flag_minus:%d\n", convs->flag_minus);
-	printf("convs->flag_plus:%d\n", convs->flag_plus);
-	printf("convs->flag_sharp:%d\n", convs->flag_sharp);
-	printf("convs->flag_space:%d\n", convs->flag_space);
-	printf("convs->flag_zero:%d\n", convs->flag_zero);
-	printf("convs->valid:%d\n", convs->valid);
-	printf("convs->mem_err:%d\n", convs->mem_err);
-	printf("convs->minus_value:%d\n", convs->minus_value);
-	printf("convs->print_size:%zu\n", convs->print_size);
-}
+//void	info_conversion(t_conversion *convs)
+//{
+//	ft_printf("\ninfo:convs->point:[%s]\n", convs->point);
+//	ft_printf("convs->size:%zu\n", convs->size);
+//	ft_printf("convs->conversion:%c\n", convs->conversion);
+//	ft_printf("convs->mini_width:%d\n", convs->mini_width);
+//	ft_printf("convs->precision:%d\n", convs->precision);
+//	ft_printf("convs->flag_minus:%d\n", convs->flag_minus);
+//	ft_printf("convs->flag_plus:%d\n", convs->flag_plus);
+//	ft_printf("convs->flag_sharp:%d\n", convs->flag_sharp);
+//	ft_printf("convs->flag_space:%d\n", convs->flag_space);
+//	ft_printf("convs->flag_zero:%d\n", convs->flag_zero);
+//	ft_printf("convs->valid:%d\n", convs->valid);
+//	ft_printf("convs->mem_err:%d\n", convs->mem_err);
+//	ft_printf("convs->minus_value:%d\n", convs->minus_value);
+//	ft_printf("convs->print_size:%zu\n", convs->print_size);
+//}
 //
