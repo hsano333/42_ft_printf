@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:26:08 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 01:22:01 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 01:23:44 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,6 @@ typedef struct s_conversion
 	size_t		arg_len;
 	size_t		print_size;
 }				t_conversion;
+
+int	ft_printf(const char *str, ...);
 #endif
