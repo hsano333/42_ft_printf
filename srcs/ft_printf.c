@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 16:52:42 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 00:10:23 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,42 @@ static t_list	*parse_str(const char *str)
 	return (return_list);
 }
 
+static size_t	ft_putstr_fd_wrapper(char *str, int fd)
+{
+	if (!str)
+		return (0);
+	ft_putstr_fd(str, fd);
+	//printf("last str size=%d\n",ft_strlen(str));
+	return (ft_strlen(str));
+}
+
 static size_t	print(const char *str, t_list *convs_list, va_list *args)
 {
-	int		error;
 	size_t	i;
 	size_t	print_size;
 	t_conversion *convs;
 	void			(*del_convs)(void *);
+	t_list *head_convs_list;
 
 	del_convs = (void (*)())clear_conversion;
-	error = true;
 	i = 0;
 	print_size = 0;
+	head_convs_list = convs_list;
 	while (convs_list)
 	{
 		convs = (t_conversion *)convs_list->content;
+		print_size += (size_t)(convs->point - str - i);
 		i += put_raw(&(str[i]), convs);
-		i += put_converted_word(convs, args, &error);
-		if (error == false)
-			return (0);
+		i += put_converted_word(convs, args);
+		if (convs->mem_err == true)
+			break ;
 		print_size += convs->print_size;
 		//info_conversion(convs);
 		convs_list = convs_list->next;
 	}
-	if (convs_list == NULL)
-		print_size += ft_putstr_fd(&(((char *)str)[i]), 1);
-	ft_lstclear(&convs_list, del_convs);
+	if (((char *)str)[i])
+		print_size += ft_putstr_fd_wrapper(&(((char *)str)[i]), 1);
+	ft_lstclear(&head_convs_list, del_convs);
 	return (print_size);
 }
 

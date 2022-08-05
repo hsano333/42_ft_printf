@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 16:44:12 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 23:56:37 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ size_t	put_raw(const char *str, t_conversion *convs)
 	size_t	len;
 
 	len = convs->point - str;
+	//printf("\nraw size:len=[%zu]\n",len);
 	write(1, str, len);
 	return (len);
 }
@@ -65,29 +66,29 @@ void	swtiching_valid(t_conversion *convs)
 	}
 }
 
-size_t	put_converted_word(t_conversion *convs, va_list *args, int *error)
+size_t	put_converted_word(t_conversion *convs, va_list *args)
 {
 	if (convs->valid == false)
 		return (write(1, convs->point, convs->size));
 	swtiching_valid(convs);
 	if (convs->conversion == 'c')
-		*error = put_word(convs, args, get_str_char);
+		put_word(convs, args, get_str_char);
 	else if (convs->conversion == 's')
-		*error = put_word(convs, args, get_str_str);
+		put_word(convs, args, get_str_str);
 	else if (convs->conversion == 'p')
-		*error = put_word(convs, args, get_str_point);
+		put_word(convs, args, get_str_point);
 	else if (convs->conversion == 'd')
-		*error = put_word(convs, args, get_str_int_digit);
+		put_word(convs, args, get_str_int_digit);
 	else if (convs->conversion == 'i')
-		*error = put_word(convs, args, get_str_int_digit);
+		put_word(convs, args, get_str_int_digit);
 	else if (convs->conversion == 'u')
-		*error = put_word(convs, args, get_str_uint_digit);
+		put_word(convs, args, get_str_uint_digit);
 	else if (convs->conversion == 'x')
-		*error = put_word(convs, args, get_str_int_lower_hex);
+		put_word(convs, args, get_str_int_lower_hex);
 	else if (convs->conversion == 'X')
-		*error = put_word(convs, args, get_str_int_upper_hex);
+		put_word(convs, args, get_str_int_upper_hex);
 	else if (convs->conversion == '%')
-		*error = put_word(convs, args, get_str_percent);
+		put_word(convs, args, get_str_percent);
 	return (convs->size);
 }
 

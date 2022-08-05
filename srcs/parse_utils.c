@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:25:55 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 14:59:41 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 21:50:52 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	exist_char(const char *str, char c, size_t size)
 //
 void	info_conversion(t_conversion *convs)
 {
-	printf("\ninfo:convs->point:[%s]", convs->point);
+	printf("\ninfo:convs->point:[%s]\n", convs->point);
 	printf("convs->size:%zu\n", convs->size);
 	printf("convs->conversion:%c\n", convs->conversion);
 	printf("convs->mini_width:%d\n", convs->mini_width);

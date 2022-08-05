@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 22:44:24 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 10:59:44 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 23:26:04 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char	*get_str_uint_digit(va_list *args, t_conversion *convs)
 	char			*str_r;
 
 	convs->mem_err = true;
+	convs->arg_len = 0;
 	word = va_arg(*args, unsigned int);
 	str = ft_strnbr_base(word, BASE_DIGIT);
 	if (!str)
@@ -56,6 +57,7 @@ char	*get_str_uint_digit(va_list *args, t_conversion *convs)
 	if (!str_r)
 		return (NULL);
 	convs->mem_err = false;
+	convs->arg_len = ft_strlen(str_r);
 	return (str_r);
 }
 
@@ -66,6 +68,7 @@ char	*get_str_int_digit(va_list *args, t_conversion *convs)
 	char		*str_r;
 
 	convs->mem_err = true;
+	convs->arg_len = 0;
 	word = va_arg(*args, int);
 	if (word < 0)
 	{
@@ -81,6 +84,7 @@ char	*get_str_int_digit(va_list *args, t_conversion *convs)
 	if (!str_r)
 		return (NULL);
 	convs->mem_err = false;
+	convs->arg_len = ft_strlen(str_r);
 	return (str_r);
 }
 
@@ -91,6 +95,7 @@ char	*get_str_int_upper_hex(va_list *args, t_conversion *convs)
 	char				*str_r;
 
 	convs->mem_err = true;
+	convs->arg_len = 0;
 	word = (unsigned long long)va_arg(*args, unsigned int);
 	str = ft_strnbr_base(word, BASE_HEX_UPPER);
 	if (!str)
@@ -110,6 +115,7 @@ char	*get_str_int_upper_hex(va_list *args, t_conversion *convs)
 	else
 		str_r = str;
 	convs->mem_err = false;
+	convs->arg_len = ft_strlen(str_r);
 	return (str_r);
 }
 
@@ -120,6 +126,7 @@ char	*get_str_int_lower_hex(va_list *args, t_conversion *convs)
 	char				*str_r;
 
 	convs->mem_err = true;
+	convs->arg_len = 0;
 	word = (unsigned long long)va_arg(*args, unsigned int);
 	str = ft_strnbr_base(word, BASE_HEX_LOWER);
 	if (!str)
@@ -139,5 +146,6 @@ char	*get_str_int_lower_hex(va_list *args, t_conversion *convs)
 	else
 		str_r = str;
 	convs->mem_err = false;
+	convs->arg_len = ft_strlen(str_r);
 	return (str_r);
 }

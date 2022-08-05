@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:26:08 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/05 14:14:48 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/05 23:14:06 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_conversion
 	int			valid;
 	int			mem_err;
 	int			minus_value;
+	size_t		arg_len;
 	size_t		print_size;
 }				t_conversion;
 
@@ -71,5 +72,5 @@ size_t			put_flag_minus(t_conversion *convs, char *str, \
 size_t			put_except_flag_minus(t_conversion *convs, char *str, \
 				int padding_len, char padding);
 size_t			put_raw(const char *str, t_conversion *convs);
-size_t			put_converted_word(t_conversion *convs, va_list *args, int *error);
+size_t			put_converted_word(t_conversion *convs, va_list *args);
 #endif
