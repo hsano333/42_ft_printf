@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 00:53:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 01:49:45 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 11:25:58 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define BASE_HEX_LOWER "0123456789abcdef"
 # define NULL_STR "(null)"
 
-#include "common.h"
+# include "common.h"
 
 char			*get_str_char(va_list *args, t_conversion *convs);
 char			*get_str_str(va_list *args, t_conversion *convs);

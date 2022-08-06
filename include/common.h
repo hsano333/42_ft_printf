@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 01:41:48 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 01:43:53 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 11:24:42 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <limits.h>
 # include <stdarg.h>
 # include <stdbool.h>
-
 
 typedef struct s_conversion
 {

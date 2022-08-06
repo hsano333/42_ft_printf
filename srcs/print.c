@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 04:33:05 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 11:23:22 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static size_t	put_raw(const char *str, t_conversion *convs)
 	return (len);
 }
 
-static int	put_word(t_conversion *convs, va_list *args, char *(*get_str)(va_list *, \
-		   	t_conversion *convs))
+static int	put_word(t_conversion *convs, va_list *args, \
+		char *(*get_str)(va_list *, t_conversion *convs))
 {
 	char	padding;
 	char	*str;
@@ -122,4 +122,3 @@ int	print(const char *str, t_list *convs_list, va_list *args)
 	ft_lstclear(&head_convs_list, del_convs);
 	return (print_size);
 }
-
