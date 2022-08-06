@@ -6,13 +6,17 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 01:41:48 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 11:24:42 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 12:41:11 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COMMON_H
 # define COMMON_H
 # define BASE_DIGIT "0123456789"
+# define NONE -1
+# define ZERO 0
+# define OVERFLOW -2
+# define MEMORY_ERROR -3
 
 # include "../libft/libft.h"
 # include <limits.h>

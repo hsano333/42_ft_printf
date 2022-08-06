@@ -6,12 +6,12 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:25:55 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 11:22:07 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 12:48:30 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "parse.h"
+#include "common.h"
 
 void	clear_conversion(t_conversion *node)
 {
@@ -47,32 +47,26 @@ int	is_invalid_int_numbers(const char **str, size_t size, int mode)
 	return (false);
 }
 
-int	ft_atoin(const char *str, size_t size, int mode, int *error)
+int	ft_atoin(const char *str, size_t size, int mode)
 {
 	char	*p;
 	int		tmp_int;
 	int		tmp_error;
 
 	if (size == 0 && mode == BACK)
-		return (-1);
+		return (NONE);
 	else if (size == 1 && mode == BACK)
-		return (0);
+		return (ZERO);
 	tmp_error = is_invalid_int_numbers(&str, size, mode);
 	if (tmp_error)
-	{
-		*error = true;
-		return (-2);
-	}
+		return (OVERFLOW);
 	p = ft_substr(str, 0, size);
 	if (!p)
-	{
-		*error = true;
-		return (-2);
-	}
-	tmp_int = ft_atoi_base(p, BASE_DIGIT, error);
+		return (MEMORY_ERROR);
+	tmp_int = ft_atoi_base(p, BASE_DIGIT, &tmp_error);
 	free(p);
-	if (*error)
-		return (-2);
+	if (tmp_error)
+		return (OVERFLOW);
 	return (tmp_int);
 }
 
