@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 16:07:53 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 16:16:17 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static int	put_word(t_conversion *convs, va_list *args, \
 	int		str_len;
 
 	str = get_str(args, convs);
-	//printf("\nget str test No.1 str=[%s]\n",str);
 	if (!str)
 		return (-1);
 	str_len = ft_strlen(str);
@@ -39,7 +38,6 @@ static int	put_word(t_conversion *convs, va_list *args, \
 	padding = ' ';
 	if ((convs->flag_zero) && !convs->flag_minus && convs->precision == NONE)
 		padding = '0';
-	//printf("put_flag_minus No.0:convs->flag_space=%d,convs->flag_minus=%d\n",convs->flag_space,convs->flag_minus);
 	if (convs->flag_minus)
 		convs->print_size = put_flag_minus(convs, str, padding_len, padding);
 	else
@@ -60,14 +58,10 @@ static void	swtiching_valid(t_conversion *convs)
 	}
 	if (c == 'c' || c == 's' || c == 'u' || c == 'd' || c == 'i')
 		convs->flag_sharp = false;
-	//if (c == 'c' || c == 's' || c == 'p')
 	if (c == 'c' || c == 's' || c == 'p')
 		convs->flag_zero = false;
 	if (c == 'p')
-	{
-		//convs->flag_minus = false;
 		convs->flag_sharp = true;
-	}
 }
 
 static size_t	put_converted_word(t_conversion *convs, va_list *args)
@@ -111,7 +105,6 @@ int	print(const char *str, t_list *convs_list, va_list *args)
 	while (convs_list)
 	{
 		convs = (t_conversion *)convs_list->content;
-		//info_conversion(convs);
 		print_size += convs->point - str - i;
 		i += put_raw(&(str[i]), convs);
 		i += put_converted_word(convs, args);

@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 15:37:12 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 16:15:44 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 
 size_t	find_conversion(const char *str, int *is_valid)
 {
-	//int		percent_flag;
 	char	*p_convs;
 	size_t	i;
 	size_t	j;
 
 	i = 1;
-	//percent_flag = false;
 	*is_valid = false;
 	p_convs = NULL;
 	while (str[i])
@@ -75,25 +73,19 @@ size_t	where_label_last(const char *str, size_t size)
 
 void	parse_conversion(const char *str, t_conversion *convs)
 {
-	//int		is_valid;
 	int		error;
 	size_t	middle_point;
 
 	error = false;
 	init_convs(convs);
 	convs->size = find_conversion(str, &convs->valid);
-	//if (convs->size <= 1)
-		//return ;
 	convs->point = str;
 	middle_point = check_period(str, convs->size);
 	convs->mini_width = ft_atoin(str, middle_point, FRONT);
 	convs->precision = ft_atoin(&(str[middle_point]), \
 			convs->size - middle_point - 1, BACK);
-	//printf("No.1 middle_point=%zu\n",middle_point);
 	middle_point = where_label_last(str, middle_point);
-	//printf("No.2 middle_point=%zu, str=%s\n",middle_point,str);
 	convs->flag_minus = exist_char(str, '-', middle_point);
-	//printf("No.3 convs->flag_minus=%d\n",convs->flag_minus);
 	convs->flag_plus = exist_char(str, '+', middle_point);
 	convs->flag_sharp = exist_char(str, '#', middle_point);
 	convs->flag_space = exist_char(str, ' ', middle_point);

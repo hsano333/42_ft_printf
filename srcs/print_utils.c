@@ -6,11 +6,10 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:11:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 15:46:52 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 16:15:05 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "print.h"
 
 size_t	put_flag_minus(t_conversion *convs, char *str, int padding_len,
@@ -18,7 +17,6 @@ size_t	put_flag_minus(t_conversion *convs, char *str, int padding_len,
 {
 	size_t	print_size;
 
-	//printf("put_flag_minus No.1:convs->flag_space=%d\n",convs->flag_space);
 	print_size = 0;
 	if (convs->minus_value)
 		print_size += write(1, "-", 1);
@@ -38,7 +36,6 @@ size_t	put_except_minus(t_conversion *convs, char *str, int padding_len,
 {
 	size_t	print_size;
 
-	//printf("put_except_minus No.4:convs->flag_space=%d\n",convs->flag_space);
 	print_size = 0;
 	while (padding == ' ' && padding_len--)
 		print_size += write(1, &padding, 1);

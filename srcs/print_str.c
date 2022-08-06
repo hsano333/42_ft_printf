@@ -6,11 +6,10 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:02:21 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 04:52:12 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 16:14:56 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "print.h"
 
 char	*get_str_char(va_list *args, t_conversion *convs)
