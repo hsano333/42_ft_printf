@@ -6,13 +6,13 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 09:34:44 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 01:51:14 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 17:56:09 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 
-#define ZERO "0"
+#define ZERO_STR "0"
 #define LLMIN_STR "-922337203685477580"
 
 static char	*put_base(unsigned long long nbr, char *base, unsigned int count,
@@ -89,7 +89,7 @@ static char	*check_min(long long nbr, int *minus, int *err)
 		if (nbr == LLONG_MIN)
 			ft_strlcpy(p, &LLMIN_STR[0], 20);
 		else
-			ft_strlcpy(p, &ZERO[0], 2);
+			ft_strlcpy(p, &ZERO_STR[0], 2);
 		return (p);
 	}
 	*minus = 1;
@@ -130,7 +130,7 @@ char	*ft_strpointer_base(unsigned long long nbrl, char *base)
 		p = malloc(2);
 		if (!p)
 			return (NULL);
-		ft_strlcpy(p, &ZERO[0], 2);
+		ft_strlcpy(p, &ZERO_STR[0], 2);
 		return (p);
 	}
 	count = check_base(base);

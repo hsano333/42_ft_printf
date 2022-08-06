@@ -19,11 +19,10 @@ LIBFTNAME = libft.a
 LIBFTOBJS = ${LIBFT}/${LIBFTNAME}
 
 all:	
-		make bonus -C $(LIBFT)
-		make ${NAME}
+		@make bonus -C $(LIBFT)
+		@make ${NAME}
 
 ${NAME}	:	${OBJS} ${LIBFTOBJS}
-			echo "test"
 			cp ${LIBFTOBJS} ${NAME}
 			ar rcs ${NAME} ${OBJS} 
 
@@ -39,5 +38,4 @@ fclean	:	clean
 re		:	fclean all
 
 bonus	:	
-			make WITH_BONUS=1
-
+			@make WITH_BONUS=1
