@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 22:44:24 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 04:22:45 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 17:13:55 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*get_str_uint_digit(va_list *args, t_conversion *convs)
 	str = ft_strnbr_base(word, BASE_DIGIT);
 	if (!str)
 		return (NULL);
-	if (convs->precision == 0 && str[0] == '0')
+	if (convs->precision == ZERO && str[0] == '0')
 		str[0] = '\0';
 	str_r = add_zero(str, convs);
 	if (!str_r)
@@ -74,7 +74,7 @@ char	*get_str_int_digit(va_list *args, t_conversion *convs)
 	str = ft_strnbr_base(word, BASE_DIGIT);
 	if (!str)
 		return (NULL);
-	if (convs->precision == 0 && str[0] == '0')
+	if (convs->precision == ZERO && str[0] == '0')
 		str[0] = '\0';
 	str_r = add_zero(str, convs);
 	if (!str_r)
@@ -94,7 +94,7 @@ char	*get_str_int_upper_hex(va_list *args, t_conversion *convs)
 	str = ft_strnbr_base(word, BASE_HEX_UPPER);
 	if (!str)
 		return (NULL);
-	if (convs->precision == 0 && str[0] == '0')
+	if (convs->precision == ZERO && str[0] == '0')
 		str[0] = '\0';
 	str = add_zero(str, convs);
 	if (!str)
@@ -123,7 +123,7 @@ char	*get_str_int_lower_hex(va_list *args, t_conversion *convs)
 	str = ft_strnbr_base(word, BASE_HEX_LOWER);
 	if (!str)
 		return (NULL);
-	if (convs->precision == 0 && str[0] == '0')
+	if (convs->precision == ZERO && str[0] == '0')
 		str[0] = '\0';
 	str = add_zero(str, convs);
 	if (!str)

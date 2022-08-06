@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 16:16:17 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 17:09:01 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	put_word(t_conversion *convs, va_list *args, \
 	str = get_str(args, convs);
 	if (!str)
 		return (-1);
-	str_len = ft_strlen(str);
+	str_len = convs->arg_len;
 	padding_len = get_padding_len(convs, str, str_len);
 	padding = ' ';
 	if ((convs->flag_zero) && !convs->flag_minus && convs->precision == NONE)
@@ -68,6 +68,7 @@ static size_t	put_converted_word(t_conversion *convs, va_list *args)
 {
 	if (convs->valid == false)
 		return (write(1, convs->point, convs->size));
+	convs->mem_err = true;
 	swtiching_valid(convs);
 	if (convs->conversion == 'c')
 		put_word(convs, args, get_str_char);

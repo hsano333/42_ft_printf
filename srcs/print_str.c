@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:02:21 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 16:14:56 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 16:54:07 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*get_str_str(va_list *args, t_conversion *convs)
 		str = ft_strdup(word);
 	if (!str)
 		return (NULL);
-	if (convs->precision > 0 || convs->precision == -1)
+	if (convs->precision > 0 || convs->precision == NONE)
 		str_r = ft_substr(str, 0, convs->precision);
 	else
 		str_r = ft_strdup("");

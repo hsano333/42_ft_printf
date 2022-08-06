@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:25:55 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 16:14:47 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 17:09:37 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	exist_char(const char *str, char c, size_t size)
 
 void	init_convs(t_conversion *convs)
 {
-	convs->mem_err = true;
+	convs->mem_err = false;
 	convs->arg_len = 0;
 	convs->mem_err = false;
 	convs->minus_value = false;
