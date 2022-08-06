@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 15:10:48 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/06 15:37:12 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,11 @@ void	parse_conversion(const char *str, t_conversion *convs)
 	convs->mini_width = ft_atoin(str, middle_point, FRONT);
 	convs->precision = ft_atoin(&(str[middle_point]), \
 			convs->size - middle_point - 1, BACK);
+	//printf("No.1 middle_point=%zu\n",middle_point);
 	middle_point = where_label_last(str, middle_point);
+	//printf("No.2 middle_point=%zu, str=%s\n",middle_point,str);
 	convs->flag_minus = exist_char(str, '-', middle_point);
+	//printf("No.3 convs->flag_minus=%d\n",convs->flag_minus);
 	convs->flag_plus = exist_char(str, '+', middle_point);
 	convs->flag_sharp = exist_char(str, '#', middle_point);
 	convs->flag_space = exist_char(str, ' ', middle_point);
