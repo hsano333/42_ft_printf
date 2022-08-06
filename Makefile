@@ -7,7 +7,7 @@ NAME 	= libftprintf.a
 LIBFT = ./libft
 PRE		= ./srcs/
 HEAD	= ./include
-SRC		= parse.c parse_utils.c ft_atoi_base.c print.c ft_strnbr_base.c print_digit.c print_str.c print_utils.c
+SRC		= parse.c parse_utils.c ft_atoi_base.c print.c ft_strnbr_base.c print_digit.c print_str.c print_utils.c common.c
 ifdef WITH_BONUS
 SRC += ft_printf_bonus.c
 else

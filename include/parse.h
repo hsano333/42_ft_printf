@@ -6,13 +6,14 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:26:08 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 14:52:36 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/07 00:18:59 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
-# define CONVERSIONS_CHAR "cspdiuxX%% .#+-0123456789oOfFeEgGlz"
+//# define CONVERSIONS_CHAR "cspdiuxX%% .#+-0123456789oOfFeEgGlz"
+# define CONVERSIONS_CHAR "cspdiuxX% .#+-0123456789"
 # define VALID_CONVERSIONS "cspdiuxX%"
 # define INVALID_CONVERSIONS "oOfFeEgGlz"
 # define FRONT 0

@@ -6,17 +6,12 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:25:55 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 17:09:37 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/07 00:14:57 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "common.h"
-
-void	clear_conversion(t_conversion *node)
-{
-	free(node);
-}
 
 int	is_invalid_int_numbers(const char **str, size_t size, int mode)
 {
