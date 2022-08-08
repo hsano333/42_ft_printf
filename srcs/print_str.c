@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:02:21 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/09 03:24:31 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/09 04:37:11 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,12 @@ char	*get_str_point(va_list *args, t_conversion *convs)
 	str = ft_strpointer_base(word, BASE_HEX_LOWER);
 	if (!str)
 		return (NULL);
-	else
-	{
-		str_r = ft_strjoin("0x", str);
-		if (!str_r)
-			return (NULL);
-		free(str);
-	}
+	if (convs->precision == ZERO && str[0] == '0')
+		str[0] = '\0';
+	str_r = ft_strjoin("0x", str);
+	if (!str_r)
+		return (NULL);
+	free(str);
 	convs->mem_err = false;
 	convs->arg_len = ft_strlen(str_r);
 	return (str_r);

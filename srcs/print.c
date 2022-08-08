@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/09 03:09:39 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/09 05:02:25 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	put_word(t_conversion *convs, va_list *args, ssize_t *print_size, \
 		return ;
 	}
 	padding = ' ';
-	if ((convs->flag_zero) && !convs->flag_minus && convs->precision == NONE)
+	if ((convs->flag_zero) && !convs->flag_minus && (convs->precision == NONE || (convs->mini_width > convs->precision &&  convs->conversion == 's')))
 		padding = '0';
 	if (convs->flag_minus)
 		convs->print_size = put_flag_minus(convs, str, padding_len, padding);
@@ -67,7 +67,7 @@ static void	swtiching_valid(t_conversion *convs)
 	}
 	if (c == 'c' || c == 's' || c == 'u' || c == 'd' || c == 'i')
 		convs->flag_sharp = false;
-	if (c == 'c' || c == 's' || c == 'p')
+	if (c == 'c' || c == 'p')
 		convs->flag_zero = false;
 	if (c == 'p')
 		convs->flag_sharp = true;
@@ -121,6 +121,7 @@ int	print(const char *str, t_list *convs_list, va_list *args)
 		i += put_converted_word(convs, args, &print_size);
 		if (convs->mem_err == true || print_size == PRINT_SIZE_OVER)
 			break ;
+		//info_conversion(convs);
 		convs_list = convs_list->next;
 	}
 	if (((char *)str)[i] || !convs->mem_err || print_size != PRINT_SIZE_OVER)
