@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 11:27:49 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/08 03:50:37 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	ft_printf(const char *str, ...)
 	c_list = parse_str(str);
 	va_start(args, str);
 	print_size = print(str, c_list, &args);
+	va_end(args);
 	return (print_size);
 }
