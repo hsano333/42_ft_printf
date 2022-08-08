@@ -6,18 +6,22 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/08 15:26:35 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/09 00:14:36 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 #include "common.h"
 
-static size_t	put_raw(const char *str, t_conversion *convs)
+static size_t	put_raw(const char *str, t_conversion *convs, int *print_size)
 {
 	size_t	len;
 
 	len = convs->point - str;
+	if (*print_size == PRINT_SIZE_OVER || len > INT_MAX || *print_size > INT_MAX - (int)len)
+		*print_size = PRINT_SIZE_OVER;
+	else
+		*print_size += len;
 	write(1, str, len);
 	return (len);
 }
@@ -64,7 +68,7 @@ static void	swtiching_valid(t_conversion *convs)
 		convs->flag_sharp = true;
 }
 
-static size_t	put_converted_word(t_conversion *convs, va_list *args)
+static size_t	put_converted_word(t_conversion *convs, va_list *args, int *print_size)
 {
 	if (convs->valid == false)
 		return (write(1, convs->point, convs->size));
@@ -76,9 +80,7 @@ static size_t	put_converted_word(t_conversion *convs, va_list *args)
 		put_word(convs, args, get_str_str);
 	else if (convs->conversion == 'p')
 		put_word(convs, args, get_str_point);
-	else if (convs->conversion == 'd')
-		put_word(convs, args, get_str_int_digit);
-	else if (convs->conversion == 'i')
+	else if (convs->conversion == 'd' || convs->conversion == 'i')
 		put_word(convs, args, get_str_int_digit);
 	else if (convs->conversion == 'u')
 		put_word(convs, args, get_str_uint_digit);
@@ -88,6 +90,10 @@ static size_t	put_converted_word(t_conversion *convs, va_list *args)
 		put_word(convs, args, get_str_int_upper_hex);
 	else if (convs->conversion == '%')
 		put_word(convs, args, get_str_percent);
+	if (*print_size == PRINT_SIZE_OVER || convs->print_size > INT_MAX || *print_size > INT_MAX - (int)convs->print_size)
+		*print_size = PRINT_SIZE_OVER;
+	else
+		*print_size += (int)convs->print_size;
 	return (convs->size);
 }
 
@@ -106,16 +112,16 @@ int	print(const char *str, t_list *convs_list, va_list *args)
 	while (convs_list)
 	{
 		convs = (t_conversion *)convs_list->content;
-		print_size += convs->point - str - i;
-		i += put_raw(&(str[i]), convs);
-		i += put_converted_word(convs, args);
+		i += put_raw(&(str[i]), convs, &print_size);
+		i += put_converted_word(convs, args, &print_size);
 		if (convs->mem_err == true)
 			break ;
-		print_size += convs->print_size;
+		//info_conversion(convs);
 		convs_list = convs_list->next;
+
 	}
 	if (((char *)str)[i])
-		print_size += ft_putstr_fd_wrapper(&(((char *)str)[i]), 1);
+		ft_putstr_fd_wrapper(&(((char *)str)[i]), 1, &print_size);
 	ft_lstclear(&head_convs_list, del_convs);
 	return (print_size);
 }

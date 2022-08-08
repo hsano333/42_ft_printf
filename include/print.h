@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 00:53:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/08 15:28:02 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/08 23:40:59 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define BASE_HEX_UPPER "0123456789ABCDEF"
 # define BASE_HEX_LOWER "0123456789abcdef"
 # define NULL_STR "(null)"
+# define PRINT_SIZE_OVER (-1)
 
 # include <unistd.h>
 # include <common.h>
@@ -37,6 +38,7 @@ size_t			put_flag_minus(t_conversion *convs, char *str, \
 				int padding_len, char padding);
 size_t			put_except_minus(t_conversion *convs, char *str, \
 				int padding_len, char padding);
-size_t			ft_putstr_fd_wrapper(char *str, int fd);
+size_t			ft_putstr_fd_wrapper(char *str, int fd, int *print_size);
 int				print(const char *str, t_list *convs_list, va_list *args);
+void	info_conversion(t_conversion *convs);
 #endif

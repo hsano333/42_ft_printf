@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 15:25:55 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/07 00:14:57 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/08 23:39:59 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,36 +65,56 @@ int	ft_atoin(const char *str, size_t size, int mode)
 	return (tmp_int);
 }
 
-int	exist_char(const char *str, char c, size_t size)
+void	set_ascii(const char *str, size_t middle_point, char* ascii_aray)
 {
-	if (ft_memchr(str, c, size))
-		return (true);
-	return (false);
+	size_t	i;
+
+	i = 0;
+	while (i < middle_point)
+		ascii_aray[(int)str[i++]] = true;
 }
 
-void	init_convs(t_conversion *convs)
+void	check_error(const char *str, t_conversion *convs, size_t middle_point, char* ascii_aray)
 {
-	convs->mem_err = false;
-	convs->arg_len = 0;
-	convs->mem_err = false;
-	convs->minus_value = false;
+	int	sum;
+	char	*p;
+	size_t	i;
+
+	i = 0;
+	sum = 0;
+	convs->valid = false;
+	ascii_aray['-'] = false;
+	ascii_aray['+'] = false;
+	ascii_aray['#'] = false;
+	while (i < 256)
+		sum += ascii_aray[i++];
+	if (sum > 0)
+		return ;
+	i = middle_point;
+	while (i < convs->size - 1)
+	{
+		p = ft_strchr("0123456789.", (int)(str[i++]));
+		if (!p)
+			return ;
+	}
+	convs->valid = true;
 }
-//#include <stdio.h>
-//void	info_conversion(t_conversion *convs)
-//{
-//	printf("\ninfo:convs->point:[%s]\n", convs->point);
-//	printf("convs->size:%zu\n", convs->size);
-//	printf("convs->conversion:%c\n", convs->conversion);
-//	printf("convs->mini_width:%d\n", convs->mini_width);
-//	printf("convs->precision:%d\n", convs->precision);
-//	printf("convs->flag_minus:%d\n", convs->flag_minus);
-//	printf("convs->flag_plus:%d\n", convs->flag_plus);
-//	printf("convs->flag_sharp:%d\n", convs->flag_sharp);
-//	printf("convs->flag_space:%d\n", convs->flag_space);
-//	printf("convs->flag_zero:%d\n", convs->flag_zero);
-//	printf("convs->valid:%d\n", convs->valid);
-//	printf("convs->mem_err:%d\n", convs->mem_err);
-//	printf("convs->minus_value:%d\n", convs->minus_value);
-//	printf("convs->print_size:%zu\n", convs->print_size);
-//}
-//
+#include <stdio.h>
+void	info_conversion(t_conversion *convs)
+{
+	printf("\ninfo:convs->point:[%s]\n", convs->point);
+	printf("convs->size:%zu\n", convs->size);
+	printf("convs->conversion:%c\n", convs->conversion);
+	printf("convs->mini_width:%d\n", convs->mini_width);
+	printf("convs->precision:%d\n", convs->precision);
+	printf("convs->flag_minus:%d\n", convs->flag_minus);
+	printf("convs->flag_plus:%d\n", convs->flag_plus);
+	printf("convs->flag_sharp:%d\n", convs->flag_sharp);
+	printf("convs->flag_space:%d\n", convs->flag_space);
+	printf("convs->flag_zero:%d\n", convs->flag_zero);
+	printf("convs->valid:%d\n", convs->valid);
+	printf("convs->mem_err:%d\n", convs->mem_err);
+	printf("convs->minus_value:%d\n", convs->minus_value);
+	printf("convs->print_size:%zu\n", convs->print_size);
+}
+

@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 01:41:48 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/08 14:51:57 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/08 21:53:03 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # define ZERO 0
 # define OVERFLOW -2
 # define MEMORY_ERROR -3
+
+# define VALID_FLAG "% .#+-"
+# define VALID_FLAG_SIZE 6
 
 # include <stdlib.h>
 # include <limits.h>
@@ -31,6 +34,7 @@ typedef struct s_conversion
 	char		conversion;
 	int			mini_width;
 	int			precision;
+	//char		flag[VALID_FLAG_SIZE];
 	int			flag_minus;
 	int			flag_plus;
 	int			flag_sharp;
