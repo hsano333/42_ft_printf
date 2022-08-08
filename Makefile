@@ -1,4 +1,3 @@
-
 CC		:= cc
 CFLAGS	:= -Wall -Wextra -Werror
 INCLUDE := -I./include
@@ -8,7 +7,7 @@ SRCDIR	:= ./srcs/
 SRC		:= parse.c parse_utils.c ft_atoi_base.c print.c ft_strnbr_base.c print_digit.c print_str.c print_utils.c common.c
 ENTRY	:= ft_printf.c
 ifdef WITH_BONUS
-ENTRY :=ft_printf_bonus.c
+ENTRY	:= ft_printf_bonus.c
 endif
 SRC	+= ${ENTRY}
 
@@ -22,7 +21,6 @@ DEPS	:= ${OBJECTS:.o=.d}
 BDEPS	:= ${OBJECTS:.o=.d}
 
 all:	
-		${MAKECMDGOALS}
 		@make bonus -C $(LIBFT)
 		@make ${NAME}
 
@@ -36,11 +34,8 @@ ${OBJDIR}/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -MMD -MP -MF ${OBJDIR}/$*.d  -o $@
 	$(CC) $(CFLAGS) $(INCLUDE) -c -o $@ $<
 
-
-
 clean	:
-			${RM} ${OBJECTS}
-			${RM} ${DEPS}
+			rm -Rf ${OBJDIR}
 			make clean -C $(LIBFT)
 
 fclean	:	clean
@@ -50,11 +45,10 @@ fclean	:	clean
 re		:	fclean all
 
 bonus	:	
-			$(CC) $(CFLAGS) $(INCLUDE) ENTRY  -MMD -MP -MF ${OBJDIR}/$*.d  -o ${OBJDIR}/ENTRY.o
 			@make WITH_BONUS=1
 
 ifeq ($(findstring clean,${MAKECMDGOALS}),)
 -include ${DEPS}
 endif
 
-.PHONY: all clean fclean re bonus
+.PHONY: clean fclean bonus re
