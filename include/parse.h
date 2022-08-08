@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:26:08 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/08 14:02:51 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/08 15:21:06 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define FRONT 0
 # define BACK 1
 # include "common.h"
+# include "libft_str.h"
+# include "libft_mem.h"
 int				ft_atoi_base(char *str, char *base, int *err);
 int				ft_atoin(const char *str, size_t size, int mode);
 int				exist_char(const char *str, char c, size_t size);

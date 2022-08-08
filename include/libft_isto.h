@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   libft_isto.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/08 14:47:45 by hsano            ###   ########.fr       */
+/*   Created: 2022/08/08 14:54:44 by hsano             #+#    #+#             */
+/*   Updated: 2022/08/08 15:12:57 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print.h"
-#include "parse.h"
-#include "libft_lst.h"
-
-int	ft_printf(const char *str, ...)
-{
-	int		print_size;
-	t_list	*c_list;
-	va_list	args;
-
-	c_list = parse_str(str);
-	va_start(args, str);
-	print_size = print(str, c_list, &args);
-	va_end(args);
-	return (print_size);
-}
+#ifndef LIBFT_ISTO_H
+# define LIBFT_ISTO_H
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
+int		ft_isalnum(int c);
+int		ft_isascii(int c);
+int		ft_isprint(int c);
+int		ft_toupper(int c);
+int		ft_tolower(int c);
+#endif

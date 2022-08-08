@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 01:41:48 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/06 12:41:11 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/08 14:51:57 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 # define OVERFLOW -2
 # define MEMORY_ERROR -3
 
-# include "../libft/libft.h"
+# include <stdlib.h>
 # include <limits.h>
 # include <stdarg.h>
 # include <stdbool.h>
+#include "libft_lst.h"
 
 typedef struct s_conversion
 {
