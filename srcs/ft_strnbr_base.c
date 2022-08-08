@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 09:34:44 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/08 15:24:43 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/09 01:57:17 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,11 @@ char	*ft_strnbr_base(long long nbr, char *base)
 	if (count == false)
 		return (NULL);
 	if (count > 1)
-		return (put_base(nbrl, base, count, minus));
+		return (put_base((unsigned long long)nbrl, base, count, minus));
 	return (NULL);
 }
 
-char	*ft_strpointer_base(unsigned long long nbrl, char *base)
+char	*ft_strpointer_base(uintptr_t nbrl, char *base)
 {
 	unsigned int	count;
 	int				minus;

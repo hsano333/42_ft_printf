@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/08 23:55:40 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/09 01:20:56 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@ static size_t	find_conversion(const char *str, int *is_valid)
 {
 	char	*p_convs;
 	size_t	i;
-	//size_t	j;
 
 	*is_valid = false;
 	p_convs = NULL;
 	i = 1;
 	while (str[i])
 	{
-		//p_convs = ft_strchr(&(VALID_CONVERSIONS[0]), (int)(str[i++]));
 		p_convs = ft_strchr(VALID_CONVERSIONS, (int)(str[i++]));
 		if (p_convs)
 			break ;
