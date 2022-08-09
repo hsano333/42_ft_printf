@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:11:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/09 16:28:02 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/10 01:51:59 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ size_t	put_flag_minus(t_conversion *convs, char *str, int padding_len,
 	return (print_size);
 }
 
+#include <stdio.h>
 size_t	put_except_minus(t_conversion *convs, char *str, int padding_len,
 		char padding)
 {
@@ -72,6 +73,8 @@ size_t	get_padding_len(t_conversion *convs, char *str, size_t str_len)
 
 	c = convs->conversion;
 	len = str_len;
+	if (convs->flag_sharp)
+		len += 2;
 	if (convs->minus_value)
 		len++;
 	else if ((convs->flag_plus || convs->flag_space) && ft_isdigit(str[0]))

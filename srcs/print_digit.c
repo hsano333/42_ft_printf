@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 22:44:24 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/09 16:27:25 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/10 01:52:05 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,18 @@ char	*get_str_int_hex(va_list *args, t_conversion *convs)
 	unsigned long long	word;
 	char				*str;
 
+	//convs->flag_sharp = false;
 	word = (unsigned long long)va_arg(*args, unsigned int);
-	str = ft_strnbr_base(word, BASE_HEX_UPPER);
+	if (convs->conversion == 'x')
+		str = ft_strnbr_base(word, BASE_HEX_LOWER);
+	else
+		str = ft_strnbr_base(word, BASE_HEX_UPPER);
 	if (!str)
 		return (NULL);
-	if (convs->precision == ZERO && str[0] == '0')
+	if ((convs->precision == ZERO) && str[0] == '0')
 		str[0] = '\0';
+	if ((convs->precision == ZERO || convs->precision == NONE) && str[0] == '0')
+		convs->flag_sharp = false;
 	if (convs->flag_sharp && str[0] != '\0' && word != 0)
 	{
 		convs->sharp_str[0] = '0';
