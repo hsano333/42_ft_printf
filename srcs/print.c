@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/09 16:24:54 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/10 02:15:17 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static void	put_word(t_conversion *convs, va_list *args, ssize_t *print_size, \
 	}
 	padding = ' ';
 //if ((convs->flag_zero) && !convs->flag_minus && (convs->precision == NONE || (convs->mini_width > convs->precision &&  convs->conversion == 's')))
-	if (convs->flag_zero && !convs->flag_minus && convs->precision == NONE)
+	//if (convs->flag_zero && !convs->flag_minus && convs->precision == NONE)
+	if (convs->flag_zero && !convs->flag_minus)// && convs->precision == NONE)
 		padding = '0';
 	if (convs->flag_minus)
 		*print_size += put_flag_minus(convs, str, padding_len, padding);
@@ -117,6 +118,7 @@ int	print(const char *str, t_list *convs_list, va_list *args)
 		i += put_converted_word(convs, args, &print_size);
 		if (convs->mem_err == true || print_size == PRINT_SIZE_OVER)
 			break ;
+		//info_conversion(convs);
 		convs_list = convs_list->next;
 	}
 	if (((char *)str)[i] || !convs->mem_err || print_size != PRINT_SIZE_OVER)

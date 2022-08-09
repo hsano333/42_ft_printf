@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:02:21 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/10 01:43:53 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/10 03:04:18 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*get_str_char(va_list *args, t_conversion *convs)
 	convs->mem_err = false;
 	convs->arg_len = 1;
 	convs->free_str = true;
+	convs->precision = 0;
+	convs->mini_width = 0;
 	return (p);
 }
 
@@ -51,6 +53,8 @@ char	*get_str_str(va_list *args, t_conversion *convs)
 		convs->arg_len = convs->precision;
 	else
 		convs->arg_len = 0;
+	convs->precision = 0;
+	convs->mini_width = 0;
 	convs->mem_err = false;
 	return (str);
 }
@@ -64,6 +68,8 @@ char	*get_str_percent(va_list *args, t_conversion *convs)
 	str = ft_strdup("%");
 	if (!str)
 		return (NULL);
+	convs->precision = 0;
+	convs->mini_width = 0;
 	convs->mem_err = false;
 	convs->free_str = true;
 	convs->arg_len = ft_strlen(str);
@@ -83,6 +89,8 @@ char	*get_str_point(va_list *args, t_conversion *convs)
 		return (NULL);
 	if (convs->precision == ZERO && str[0] == '0')
 		str[0] = '\0';
+	convs->precision = 0;
+	convs->mini_width = 0;
 	convs->sharp_str[0] = '0';
 	convs->sharp_str[1] = 'x';
 	convs->mem_err = false;

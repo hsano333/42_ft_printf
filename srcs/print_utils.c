@@ -6,15 +6,20 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:11:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/10 01:51:59 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/10 02:56:20 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
+#include <stdio.h>
 
 size_t	put_flag_minus(t_conversion *convs, char *str, int padding_len,
 		char padding)
 {
+
+	padding_len = 0;
+	while (padding_len--)
+		printf("test");
 	size_t	print_size;
 
 	print_size = 0;
@@ -26,9 +31,13 @@ size_t	put_flag_minus(t_conversion *convs, char *str, int padding_len,
 		print_size += write(1, " ", 1);
 	if (convs->flag_sharp)
 		print_size += write(1, &convs->sharp_str, 2);
-	print_size += write(1, str, convs->arg_len);
-	while (padding_len--)
+	while (convs->precision--)
 		print_size += write(1, &padding, 1);
+	print_size += write(1, str, convs->arg_len);
+	//while (padding_len--)
+		//print_size += write(1, &padding, 1);
+	while (convs->mini_width--)
+		print_size += write(1, " ", 1);
 	return (print_size);
 }
 
@@ -36,21 +45,28 @@ size_t	put_flag_minus(t_conversion *convs, char *str, int padding_len,
 size_t	put_except_minus(t_conversion *convs, char *str, int padding_len,
 		char padding)
 {
+	padding_len = 0;
+	while (padding_len--)
+		printf("test");
 	size_t	print_size;
 
 	print_size = 0;
-	while (padding == ' ' && padding_len--)
-		print_size += write(1, &padding, 1);
+	//while (padding == ' ' && padding_len--)
+		//print_size += write(1, &padding, 1);
+	while (convs->mini_width--)
+		print_size += write(1, " ", 1);
 	if (convs->minus_value)
 		print_size += write(1, "-", 1);
 	else if (convs->flag_plus && ft_isdigit(str[0]))
 		print_size += write(1, "+", 1);
 	else if (convs->flag_space && ft_isdigit(str[0]))
 		print_size += write(1, " ", 1);
-	while (padding == '0' && padding_len--)
-		print_size += write(1, &padding, 1);
+	//while (padding == '0' && padding_len--)
+		//print_size += write(1, &padding, 1);
 	if (convs->flag_sharp)
 		print_size += write(1, &convs->sharp_str, 2);
+	while (convs->precision--)
+		print_size += write(1, &padding, 1);
 	print_size += write(1, str, convs->arg_len);
 	return (print_size);
 }
