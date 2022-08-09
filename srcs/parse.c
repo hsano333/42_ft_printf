@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/09 01:20:56 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/09 14:25:06 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ static size_t	find_conversion(const char *str, int *is_valid)
 static size_t	check_period(const char *str, size_t str_size)
 {
 	char	*p;
-	size_t	i;
 	size_t	period_index;
 
-	i = 0;
 	p = ft_memchr(str, '.', str_size);
 	if (!p)
 		return (str_size - 1);
