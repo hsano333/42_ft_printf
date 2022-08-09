@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/09 14:42:18 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/09 16:24:54 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static size_t	put_raw(const char *str, t_conversion *convs, ssize_t *print_size)
 }
 
 static void	put_word(t_conversion *convs, va_list *args, ssize_t *print_size, \
-								char *(*get_str)(va_list *, t_conversion *convs))
+				char *(*get_str)(va_list *, t_conversion *convs))
 {
 	char	padding;
 	char	*str;
@@ -37,10 +37,11 @@ static void	put_word(t_conversion *convs, va_list *args, ssize_t *print_size, \
 	if (!str)
 		return ;
 	padding_len = get_padding_len(convs, str, convs->arg_len);
-	if (convs->arg_len + padding_len + *print_size >= INT_MAX)
+	if (convs->arg_len + padding_len + *print_size + is_sign(convs, str) >= INT_MAX)
 	{
 		*print_size = PRINT_SIZE_OVER;
-		free(str);
+		if (convs->free_str)
+			free(str);
 		return ;
 	}
 	padding = ' ';
@@ -48,10 +49,10 @@ static void	put_word(t_conversion *convs, va_list *args, ssize_t *print_size, \
 	if (convs->flag_zero && !convs->flag_minus && convs->precision == NONE)
 		padding = '0';
 	if (convs->flag_minus)
-		convs->print_size = put_flag_minus(convs, str, padding_len, padding);
+		*print_size += put_flag_minus(convs, str, padding_len, padding);
 	else
-		convs->print_size = put_except_minus(convs, str, padding_len, padding);
-	if (convs->not_free == false)
+		*print_size += put_except_minus(convs, str, padding_len, padding);
+	if (convs->free_str)
 		free(str);
 	return ;
 }
@@ -74,9 +75,9 @@ static void	swtiching_valid(t_conversion *convs)
 		convs->flag_sharp = true;
 }
 
-static size_t	put_converted_word(t_conversion *convs, va_list *args, ssize_t *print_size)
+static size_t	put_converted_word (t_conversion *convs, va_list *args, ssize_t *print_size)
 {
-	if (convs->valid == false)
+	if (convs->valid == false || *print_size == PRINT_SIZE_OVER)
 		return (write(1, convs->point, convs->size));
 	convs->mem_err = true;
 	swtiching_valid(convs);
@@ -90,16 +91,10 @@ static size_t	put_converted_word(t_conversion *convs, va_list *args, ssize_t *pr
 		put_word(convs, args, print_size, get_str_int_digit);
 	else if (convs->conversion == 'u')
 		put_word(convs, args, print_size, get_str_uint_digit);
-	else if (convs->conversion == 'x')
-		put_word(convs, args, print_size, get_str_int_lower_hex);
-	else if (convs->conversion == 'X')
-		put_word(convs, args, print_size, get_str_int_upper_hex);
+	else if (convs->conversion == 'x' || convs->conversion == 'X')
+		put_word(convs, args, print_size, get_str_int_hex);
 	else if (convs->conversion == '%')
 		put_word(convs, args, print_size, get_str_percent);
-	if (*print_size == PRINT_SIZE_OVER || convs->print_size >= INT_MAX || *print_size >= INT_MAX - (int)convs->print_size)
-		*print_size = PRINT_SIZE_OVER;
-	else
-		*print_size += (int)convs->print_size;
 	return (convs->size);
 }
 
@@ -122,7 +117,6 @@ int	print(const char *str, t_list *convs_list, va_list *args)
 		i += put_converted_word(convs, args, &print_size);
 		if (convs->mem_err == true || print_size == PRINT_SIZE_OVER)
 			break ;
-		//info_conversion(convs);
 		convs_list = convs_list->next;
 	}
 	if (((char *)str)[i] || !convs->mem_err || print_size != PRINT_SIZE_OVER)

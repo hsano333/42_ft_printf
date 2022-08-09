@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:02:21 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/09 04:37:11 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/09 16:27:05 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,24 @@ char	*get_str_char(va_list *args, t_conversion *convs)
 	p[1] = '\0';
 	convs->mem_err = false;
 	convs->arg_len = 1;
+	convs->free_str = true;
 	return (p);
 }
 
 char	*get_str_str(va_list *args, t_conversion *convs)
 {
-	//char	*word;
 	char	*str;
 	size_t	len;
 
 	len = 0;
 	str = va_arg(*args, char *);
-	convs->not_free = true;
+	convs->free_str = true;
 	if (str == NULL)
 	{
-		convs->not_free = false;
+		convs->free_str = false;
 		str = ft_strdup(NULL_STR);
 		if (!str)
 			return (NULL);
-		//len = 6;
 	}
 	len = ft_strlen(str);
 	if (convs->precision == NONE || (size_t)convs->precision > len)
@@ -66,6 +65,7 @@ char	*get_str_percent(va_list *args, t_conversion *convs)
 	if (!str)
 		return (NULL);
 	convs->mem_err = false;
+	convs->free_str = true;
 	convs->arg_len = ft_strlen(str);
 	if (convs->arg_len >= INT_MAX)
 		convs->valid = false;
@@ -76,7 +76,6 @@ char	*get_str_point(va_list *args, t_conversion *convs)
 {
 	uintptr_t			word;
 	char				*str;
-	char				*str_r;
 
 	word = (uintptr_t)va_arg(*args, char *);
 	str = ft_strpointer_base(word, BASE_HEX_LOWER);
@@ -84,11 +83,10 @@ char	*get_str_point(va_list *args, t_conversion *convs)
 		return (NULL);
 	if (convs->precision == ZERO && str[0] == '0')
 		str[0] = '\0';
-	str_r = ft_strjoin("0x", str);
-	if (!str_r)
-		return (NULL);
-	free(str);
+	convs->sharp_str[0] = '0';
+	convs->sharp_str[1] = 'x';
 	convs->mem_err = false;
-	convs->arg_len = ft_strlen(str_r);
-	return (str_r);
+	convs->free_str = true;
+	convs->arg_len = ft_strlen(str);
+	return (str);
 }

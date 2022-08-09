@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 00:53:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/09 02:52:42 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/09 16:25:21 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ char			*get_str_str(va_list *args, t_conversion *convs);
 char			*get_str_point(va_list *args, t_conversion *convs);
 char			*get_str_int_digit(va_list *args, t_conversion *convs);
 char			*get_str_uint_digit(va_list *args, t_conversion *convs);
-char			*get_str_int_upper_hex(va_list *args, t_conversion *convs);
-char			*get_str_int_lower_hex(va_list *args, t_conversion *convs);
+char			*get_str_int_hex(va_list *args, t_conversion *convs);
 char			*get_str_percent(va_list *args, t_conversion *convs);
 char			*ft_strnbr_base(long long nbr, char *base);
 char			*ft_strpointer_base(uintptr_t nbrl, char *base);
@@ -44,4 +43,5 @@ size_t			put_except_minus(t_conversion *convs, char *str, \
 size_t			ft_putstr_fd_wrapper(char *str, int fd, ssize_t *print_size);
 int				print(const char *str, t_list *convs_list, va_list *args);
 void	info_conversion(t_conversion *convs);
+size_t			is_sign(t_conversion *convs, char *str);
 #endif
