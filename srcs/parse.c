@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/11 02:00:46 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 02:14:59 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ t_list	*parse_str(const char *str)
 	const char		*pp;
 	t_conversion	*convs;
 	t_list			*convs_list;
+	t_list			*new_list;
 	void			(*del_convs)(void *);
 
 	convs_list = NULL;
@@ -104,7 +105,10 @@ t_list	*parse_str(const char *str)
 			return (NULL);
 		}
 		parse_conversion(pp, convs);
-		ft_lstadd_back(&convs_list, ft_lstnew(convs));
+		new_list = ft_lstnew(convs);
+		if (!new_list)
+			return (NULL);
+		ft_lstadd_back(&convs_list, new_list);
 		pp = ft_strchr(pp + convs->size, '%');
 	}
 	return (convs_list);
