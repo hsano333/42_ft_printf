@@ -6,19 +6,20 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/10 20:29:51 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 01:16:23 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 #include "common.h"
 
-static size_t	put_raw(const char *str, t_conversion *convs, ssize_t *print_size)
+static size_t	put_raw(const char *str, t_conversion *convs, \
+												ssize_t *print_size)
 {
 	size_t	len;
 
 	len = convs->point - str;
-	if (*print_size == PRINT_SIZE_OVER || len >= INT_MAX || *print_size >= INT_MAX - (int)len)
+	if (len >= INT_MAX || *print_size >= INT_MAX - (int)len)
 		*print_size = PRINT_SIZE_OVER;
 	else
 		*print_size += len;
@@ -26,19 +27,16 @@ static size_t	put_raw(const char *str, t_conversion *convs, ssize_t *print_size)
 	return (len);
 }
 
-#include <stdio.h>
 static void	put_word(t_conversion *convs, va_list *args, ssize_t *print_size, \
 				char *(*get_str)(va_list *, t_conversion *convs))
 {
 	char	padding;
 	char	*str;
-	size_t	padding_len;
 
 	str = get_str(args, convs);
 	if (!str)
 		return ;
-	padding_len = get_padding_len(convs, str, convs->arg_len);
-	if (convs->arg_len + padding_len + *print_size + is_sign(convs, str) >= INT_MAX)
+	if (get_estimated_size(convs, str) + *print_size >= INT_MAX)
 	{
 		*print_size = PRINT_SIZE_OVER;
 		if (convs->free_str)
@@ -46,9 +44,7 @@ static void	put_word(t_conversion *convs, va_list *args, ssize_t *print_size, \
 		return ;
 	}
 	padding = ' ';
-//if ((convs->flag_zero) && !convs->flag_minus && (convs->precision == NONE || (convs->mini_width > convs->precision &&  convs->conversion == 's')))
-	//if (convs->flag_zero && !convs->flag_minus && convs->precision == NONE)
-	if (convs->flag_zero)// && convs->precision == NONE)
+	if (convs->flag_zero)
 		padding = '0';
 	if (convs->flag_minus)
 		*print_size += put_flag_minus(convs, str, padding);
@@ -75,7 +71,8 @@ static void	swtiching_valid(t_conversion *convs)
 		convs->flag_sharp = true;
 }
 
-static size_t	put_converted_word (t_conversion *convs, va_list *args, ssize_t *print_size)
+static size_t	put_converted_word(t_conversion *convs, va_list *args, \
+														ssize_t *print_size)
 {
 	if (convs->valid == false || *print_size == PRINT_SIZE_OVER)
 		return (write(1, convs->point, convs->size));
@@ -117,7 +114,6 @@ int	print(const char *str, t_list *convs_list, va_list *args)
 		i += put_converted_word(convs, args, &print_size);
 		if (convs->mem_err == true || print_size == PRINT_SIZE_OVER)
 			break ;
-		//info_conversion(convs);
 		convs_list = convs_list->next;
 	}
 	if (((char *)str)[i] || !convs->mem_err || print_size != PRINT_SIZE_OVER)

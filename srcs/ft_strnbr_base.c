@@ -6,12 +6,12 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 09:34:44 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/09 14:27:43 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 01:23:16 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
-# include <libft_str.h>
+#include <libft_str.h>
 #include <stdint.h>
 
 #define ZERO_STR "0"

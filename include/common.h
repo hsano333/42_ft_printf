@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 01:41:48 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/10 21:02:48 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 01:21:07 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <limits.h>
 # include <stdarg.h>
 # include <stdbool.h>
-#include "libft_lst.h"
+# include "libft_lst.h"
 
 typedef struct s_conversion
 {
@@ -34,7 +34,6 @@ typedef struct s_conversion
 	char		conversion;
 	int			mini_width;
 	int			precision;
-	//char		flag[VALID_FLAG_SIZE];
 	int			flag_minus;
 	int			flag_plus;
 	int			flag_sharp;
@@ -44,7 +43,7 @@ typedef struct s_conversion
 	int			mem_err;
 	int			minus_value;
 	int			free_str;
-	char			sharp_str[2];
+	char		sharp_str[2];
 	size_t		arg_len;
 	size_t		print_size;
 }				t_conversion;

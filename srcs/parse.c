@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/09 14:25:06 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 01:33:11 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	parse_conversion(const char *str, t_conversion *convs)
 	size_t	middle_point;
 	char	ascii_aray[256];
 
-	*convs = (t_conversion){ 0 };
+	*convs = (t_conversion){0};
 	ft_memset(ascii_aray, 0, 256);
 	convs->point = str;
 	convs->size = find_conversion(str, &convs->valid);
@@ -82,7 +82,7 @@ static void	parse_conversion(const char *str, t_conversion *convs)
 	convs->flag_space = (ascii_aray[' '] == true);
 	convs->flag_zero = (ascii_aray['0'] == true);
 	convs->conversion = str[convs->size - 1];
-	//check_error(str, convs, middle_point, ascii_aray);
+	check_error(str, convs, middle_point, ascii_aray);
 }
 
 t_list	*parse_str(const char *str)

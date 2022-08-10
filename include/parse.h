@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:26:08 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/08 23:47:05 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 01:20:27 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 int				ft_atoi_base(char *str, char *base, int *err);
 int				ft_atoin(const char *str, size_t size, int mode);
 void			info_conversion(t_conversion *convs);
-void			check_error(const char *str, t_conversion *convs, size_t middle_point, char* ascii_aray);
-void			set_ascii(const char *str, size_t middle_point, char* ascii_aray);
+void			check_error(const char *str, t_conversion *convs, \
+							size_t middle_point, char *ascii_aray);
+void			set_ascii(const char *str, size_t middle_point, \
+												char *ascii_aray);
 t_list			*parse_str(const char *str);
 #endif
