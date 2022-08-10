@@ -6,19 +6,19 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/11 01:33:11 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 02:00:46 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "common.h"
 
-static size_t	find_conversion(const char *str, int *is_valid)
+static size_t	find_conversion(const char *str, t_conversion *convs)
 {
 	char	*p_convs;
 	size_t	i;
 
-	*is_valid = false;
+	convs->valid = false;
 	p_convs = NULL;
 	i = 1;
 	while (str[i])
@@ -29,7 +29,7 @@ static size_t	find_conversion(const char *str, int *is_valid)
 	}
 	if (!p_convs)
 		return (i);
-	*is_valid = true;
+	convs->valid = true;
 	return (i);
 }
 
@@ -67,7 +67,7 @@ static void	parse_conversion(const char *str, t_conversion *convs)
 	*convs = (t_conversion){0};
 	ft_memset(ascii_aray, 0, 256);
 	convs->point = str;
-	convs->size = find_conversion(str, &convs->valid);
+	convs->size = find_conversion(str, convs);
 	if (convs->valid == false)
 		return ;
 	middle_point = check_period(str, convs->size);
