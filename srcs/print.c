@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/10 02:15:17 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/10 20:29:51 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static size_t	put_raw(const char *str, t_conversion *convs, ssize_t *print_size)
 	return (len);
 }
 
+#include <stdio.h>
 static void	put_word(t_conversion *convs, va_list *args, ssize_t *print_size, \
 				char *(*get_str)(va_list *, t_conversion *convs))
 {
@@ -47,12 +48,12 @@ static void	put_word(t_conversion *convs, va_list *args, ssize_t *print_size, \
 	padding = ' ';
 //if ((convs->flag_zero) && !convs->flag_minus && (convs->precision == NONE || (convs->mini_width > convs->precision &&  convs->conversion == 's')))
 	//if (convs->flag_zero && !convs->flag_minus && convs->precision == NONE)
-	if (convs->flag_zero && !convs->flag_minus)// && convs->precision == NONE)
+	if (convs->flag_zero)// && convs->precision == NONE)
 		padding = '0';
 	if (convs->flag_minus)
-		*print_size += put_flag_minus(convs, str, padding_len, padding);
+		*print_size += put_flag_minus(convs, str, padding);
 	else
-		*print_size += put_except_minus(convs, str, padding_len, padding);
+		*print_size += put_except_minus(convs, str, padding);
 	if (convs->free_str)
 		free(str);
 	return ;
@@ -70,8 +71,6 @@ static void	swtiching_valid(t_conversion *convs)
 	}
 	if (c == 'c' || c == 's' || c == 'u' || c == 'd' || c == 'i')
 		convs->flag_sharp = false;
-	if (c == 'c' || c == 'p')
-		convs->flag_zero = false;
 	if (c == 'p')
 		convs->flag_sharp = true;
 }

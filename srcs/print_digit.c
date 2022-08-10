@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 22:44:24 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/10 03:08:57 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 00:18:52 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,22 @@ static void fix_precision_and_minisize(char *str, t_conversion *convs)
 {
 	int		str_len;
 
+
+
+	if (convs->precision > 0 || str[0] == '\0')
+		convs->flag_zero = false;
 	str_len = (int)ft_strlen(str);
 	if (str_len >= convs->precision)
 		convs->precision = str_len;
+	//if (convs->precision == ZERO)
+
 	if (convs->mini_width >= convs->precision)
+	{
 		convs->mini_width -= convs->precision; 
+	}
 	else 
 		convs->mini_width = 0;
+
 	if (convs->precision >= str_len)
 		convs->precision -= str_len;
 	else 
@@ -91,7 +100,6 @@ char	*get_str_int_digit(va_list *args, t_conversion *convs)
 {
 	long long	word;
 	char		*str;
-	//char		*str_r;
 
 	word = va_arg(*args, int);
 	if (word < 0)
@@ -104,10 +112,9 @@ char	*get_str_int_digit(va_list *args, t_conversion *convs)
 		return (NULL);
 	if (convs->precision == ZERO && str[0] == '0')
 		str[0] = '\0';
-	//str_r = add_zero(str, convs);
 	fix_precision_and_minisize(str, convs);
-	//if (!str_r)
-		//return (NULL);
+	if (convs->minus_value && convs->mini_width > 0)
+		convs->mini_width--;
 	convs->mem_err = false;
 	convs->free_str = true;
 	convs->arg_len = ft_strlen(str);

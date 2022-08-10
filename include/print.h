@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 00:53:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/09 16:25:21 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/10 15:33:30 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define GET_LEN 1
 
 # include <unistd.h>
-# include <common.h>
+# include "common.h"
 #include "libft_isto.h"
 #include "libft_str.h"
 #include "libft_put.h"
@@ -36,12 +36,10 @@ char			*get_str_percent(va_list *args, t_conversion *convs);
 char			*ft_strnbr_base(long long nbr, char *base);
 char			*ft_strpointer_base(uintptr_t nbrl, char *base);
 size_t			get_padding_len(t_conversion *convs, char *str, size_t str_len);
-size_t			put_flag_minus(t_conversion *convs, char *str, \
-				int padding_len, char padding);
-size_t			put_except_minus(t_conversion *convs, char *str, \
-				int padding_len, char padding);
-size_t			ft_putstr_fd_wrapper(char *str, int fd, ssize_t *print_size);
+size_t			put_flag_minus(t_conversion *convs, char *str, char padding);
+size_t			put_except_minus(t_conversion *convs, char *str, char padding);
+				size_t			ft_putstr_fd_wrapper(char *str, int fd, ssize_t *print_size);
 int				print(const char *str, t_list *convs_list, va_list *args);
-void	info_conversion(t_conversion *convs);
+void			info_conversion(t_conversion *convs);
 size_t			is_sign(t_conversion *convs, char *str);
 #endif

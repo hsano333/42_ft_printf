@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:02:21 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/10 03:04:18 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/10 19:12:37 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,23 @@ char	*get_str_char(va_list *args, t_conversion *convs)
 	int		word_input;
 	char	*p;
 
+	//if (convs->precision > convs->mini_width)
+	convs->precision = 0;
 	word_input = (char)va_arg(*args, int);
 	p = malloc(2);
 	if (!p)
+	{
 		return (NULL);
+	}
 	p[0] = word_input;
 	p[1] = '\0';
 	convs->mem_err = false;
 	convs->arg_len = 1;
 	convs->free_str = true;
-	convs->precision = 0;
-	convs->mini_width = 0;
+	if (convs->mini_width > 0)
+		convs->mini_width -= 1;
+	else 
+		convs->mini_width = 0;
 	return (p);
 }
 
@@ -49,12 +55,20 @@ char	*get_str_str(va_list *args, t_conversion *convs)
 	len = ft_strlen(str);
 	if (convs->precision == NONE || (size_t)convs->precision > len)
 		convs->arg_len = len;
-	else if (convs->precision > 0)
+	else if (convs->precision >= 0)
 		convs->arg_len = convs->precision;
-	else
-		convs->arg_len = 0;
+
+	if (convs->precision > 0 || (size_t)convs->precision > len)
+		convs->precision -= len;
+	else 
+		convs->precision =0;
+
 	convs->precision = 0;
-	convs->mini_width = 0;
+	//convs->mini_width = 0;
+	if (convs->mini_width > 0 && convs->mini_width > (int)convs->arg_len + convs->precision)
+		convs->mini_width -= ((int)convs->arg_len + convs->precision);
+	else 
+		convs->mini_width = 0;
 	convs->mem_err = false;
 	return (str);
 }
@@ -86,15 +100,25 @@ char	*get_str_point(va_list *args, t_conversion *convs)
 	word = (uintptr_t)va_arg(*args, char *);
 	str = ft_strpointer_base(word, BASE_HEX_LOWER);
 	if (!str)
+	{
 		return (NULL);
+	}
 	if (convs->precision == ZERO && str[0] == '0')
 		str[0] = '\0';
 	convs->precision = 0;
-	convs->mini_width = 0;
 	convs->sharp_str[0] = '0';
 	convs->sharp_str[1] = 'x';
 	convs->mem_err = false;
 	convs->free_str = true;
+	convs->flag_zero = false;
 	convs->arg_len = ft_strlen(str);
+	if (convs->mini_width > 0 && (convs->mini_width > (int)convs->arg_len))
+		convs->mini_width -= convs->arg_len;
+	else 
+		convs->mini_width = 0;
+	if (convs->flag_sharp && convs->mini_width >= 2)
+		convs->mini_width -= 2;
+	else 
+		convs->mini_width = 0;
 	return (str);
 }
