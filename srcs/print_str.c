@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:02:21 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/11 13:54:47 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 14:26:18 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ char	*get_str_percent(va_list *args, t_conversion *convs)
 	convs->mem_err = false;
 	convs->free_str = true;
 	convs->arg_len = ft_strlen(str);
-	if (convs->arg_len >= INT_MAX)
-		convs->valid = false;
 	return (str);
 }
 

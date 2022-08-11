@@ -6,7 +6,7 @@
 /*   By: hsano <hsano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:11:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/11 13:47:57 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 13:58:53 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,7 @@ size_t	is_sign(t_conversion *convs, char *str)
 size_t	get_estimated_size(t_conversion *convs, char *str)
 {
 	size_t	len;
-	char	c;
 
-	c = convs->conversion;
 	len = convs->arg_len;
 	if (convs->flag_sharp)
 		len += 2;

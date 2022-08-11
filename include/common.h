@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 01:41:48 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/11 03:15:30 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 14:31:49 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 # define BASE_DIGIT "0123456789"
 # define NONE -1
 # define ZERO 0
-# define OVERFLOW -2
-# define MEMORY_ERROR -3
+# define OVERFLOW -4
+# define MEMORY_ERROR -5
+# define ERROR_ATOI -3
 
 # include <stdlib.h>
 # include <limits.h>

@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/11 03:11:23 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 14:31:22 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static void	parse_conversion(const char *str, t_conversion *convs)
 	convs->mini_width = ft_atoin(str, middle_point, FRONT);
 	convs->precision = ft_atoin(&(str[middle_point]), \
 			convs->size - middle_point - 1, BACK);
+	if (convs->mini_width <= ERROR_ATOI || convs->precision <= ERROR_ATOI)
+		return ;
 	middle_point = where_label_last(str, middle_point);
 	set_ascii(str, middle_point, ascii_aray);
 	convs->flag_minus = (ascii_aray['-'] == true);
