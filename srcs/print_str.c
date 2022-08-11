@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 21:02:21 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/11 00:45:37 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 13:54:47 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*get_str_point(va_list *args, t_conversion *convs)
 		convs->mini_width = 0;
 	if (convs->flag_sharp && convs->mini_width >= 2)
 		convs->mini_width -= 2;
-	else
+	else if(convs->flag_sharp)
 		convs->mini_width = 0;
 	return (str);
 }
