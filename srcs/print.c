@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 00:40:34 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/11 13:49:46 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/11 21:32:39 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	put_word(t_conversion *convs, va_list *args, ssize_t *print_size, \
 		return ;
 	}
 	padding = ' ';
-	if (convs->flag_zero && (!convs->flag_minus ))
+	if (convs->flag_zero && (!convs->flag_minus))
 		padding = '0';
 	if (convs->flag_minus)
 		*print_size += put_flag_minus(convs, str, padding);
