@@ -6,13 +6,12 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/12 00:38:34 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/12 00:41:32 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "print.h"
 #include "parse.h"
-#include "libft_lst.h"
 
 int	ft_printf(const char *str, ...)
 {
