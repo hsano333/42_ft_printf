@@ -6,12 +6,13 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 12:16:50 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/11 14:31:22 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/12 00:04:48 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "common.h"
+# include "libft_mem.h"
 
 static size_t	find_conversion(const char *str, t_conversion *convs)
 {
@@ -64,7 +65,7 @@ static void	parse_conversion(const char *str, t_conversion *convs)
 	size_t	middle_point;
 	char	ascii_aray[256];
 
-	*convs = (t_conversion){0};
+	ft_memset(convs , 0, sizeof(t_conversion));
 	ft_memset(ascii_aray, 0, 256);
 	convs->point = str;
 	convs->size = find_conversion(str, convs);
