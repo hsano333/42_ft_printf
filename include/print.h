@@ -6,7 +6,7 @@
 /*   By: hsano </var/mail/hsano>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 00:53:22 by hsano             #+#    #+#             */
-/*   Updated: 2022/08/11 01:17:43 by hsano            ###   ########.fr       */
+/*   Updated: 2022/08/14 03:21:32 by hsano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ size_t			ft_putstr_fd_wrapper(char *str, int fd, ssize_t *print_size);
 int				print(const char *str, t_list *convs_list, va_list *args);
 void			info_conversion(t_conversion *convs);
 size_t			is_sign(t_conversion *convs, char *str);
+void			fix_precision_and_minisize(char *str, t_conversion *convs);
 #endif
